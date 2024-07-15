@@ -1,0 +1,107 @@
+.blogDetailContainer {
+  min-height: 100vh;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 7rem 1.5rem;
+  // width: 100vw;
+  //   background-color: black;
+  .blogDetailLeftSide {
+    border-radius: 2.5rem;
+    width: 100%;
+    height: 400px;
+    // overflow: hidden;
+    img {
+      border-radius: 2.5rem;
+      object-fit: cover;
+      height: 100%;
+      width: 100%;
+    }
+  }
+  .blogDetailRightSide {
+    margin: 1.2rem 0;
+    .blogDetailRightSideContainer {
+      //   margin: 1.2rem 0;
+      box-shadow: 0 4px 8px rgba(120, 3, 3, 0.275);
+      padding: 1rem;
+      border-radius: 20px;
+      .blogDetailHeader {
+        width: 100%;
+        border-bottom: 1px solid black;
+        margin-bottom: 1.2rem;
+      }
+      .blogDetailContent {
+        border-bottom: 1px solid black;
+        margin: 1rem 0;
+      }
+      .blogDetailLike {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        // background-color: black;
+        gap: 0.5rem;
+        .blogDetailLikeNumber {
+          display: flex;
+          gap: 0.5rem;
+          font-weight: 500;
+          .blogDetailIcon {
+            font-weight: 500;
+            font-size: 20px;
+            cursor: pointer;
+            &:hover {
+              filter: drop-shadow(0 0 0.75rem crimson);
+            }
+          }
+        }
+        .blogDetailButton {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          .blogDetailButtonItems {
+            padding: 0.75rem;
+            border: none;
+            border-radius: 20px;
+            transition: all 0.3s ease-in-out;
+            &:hover {
+              box-shadow: 0 0px 8px rgba(0, 0, 0, 0.31);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (min-width: 976px) {
+  .blogDetailContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    // background-color: rgba(0, 0, 0, 0.125);
+    padding: 10rem 0;
+    .blogDetailLeftSide {
+      width: 45%;
+      height: 500px;
+      //   overflow: hidden;
+      background-color: aqua;
+      img {
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+    .blogDetailRightSide {
+      width: 45%;
+      height: 500px !important;
+      margin-left: 0 !important;
+      .blogDetailRightSideContainer {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}

@@ -1,0 +1,136 @@
+.tourContainer {
+  width: 100%;
+  height: 100%;
+  min-height: 900px;
+  padding: 2rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  .leftBar {
+    width: 20%;
+    height: 60%;
+    .searchBar {
+      top: 160px;
+      // position: fixed;
+      padding: 1rem;
+      border-radius: 20px;
+      height: 50%;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.23);
+      overflow: scroll;
+      .searchBarItems {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        margin: 10px 0;
+        Input {
+          box-shadow: 0 0 3px green($color: #000000);
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+    }
+  }
+  .rightSide {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.23);
+  }
+}
+.pagination span {
+  width: 2rem;
+  height: 2rem;
+  padding: 5px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--secondary-color);
+  color: var(--heading-color);
+  font-size: 1.1rem;
+  cursor: pointer;
+  font-weight: 700;
+}
+.active__page {
+  background: var(--secondary-color);
+  color: #fff !important;
+}
+@media screen and (max-width: 980px) {
+  .tourContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    .leftBar {
+      width: 100%;
+      height: 60%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      .searchBar {
+        width: 80%;
+        padding: 1rem;
+        border-radius: 20px;
+        height: 40%;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.23);
+        .form-check {
+          display: flex;
+        }
+        .searchBarItems {
+          width: 100%;
+          display: flex;
+          justify-content: space-around;
+          margin: 10px 0;
+          Input {
+            box-shadow: 0 0 3px green($color: #000000);
+            &:focus {
+              outline: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (min-width: 980px) {
+  .tourContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    min-height: 1000px;
+    justify-content: flex-start;
+    .createTourBar {
+      width: 100%;
+      height: 150px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: end;
+      margin-bottom: 1rem;
+      // background-color: black;
+    }
+    .mainSide {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      justify-content: space-between;
+      .leftBar {
+        min-height: 680px;
+        .searchBar {
+          // position: fixed;
+          width: 250px;
+        }
+      }
+      .rightSide {
+        width: 80% !important;
+        height: 100%;
+        min-height: 600px;
+        border-radius: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.23);
+      }
+    }
+  }
+}

@@ -1,0 +1,49 @@
+.AuthContainer {
+  background: linear-gradient(150deg, white, rgba(0, 128, 0, 0.107));
+  height: 100vh;
+  padding: 2rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .authForm {
+    width: 100%;
+    max-height: 500px;
+    box-shadow: 0px 0px 5px black;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    // justify-content: space-between;
+    // align-items: center;
+    img {
+      display: none;
+    }
+
+    .loginForm {
+      width: 100%;
+    }
+  }
+}
+@media screen and (min-width: 767px) {
+  .authForm {
+    width: 100%;
+    height: 100%;
+    // background-color: yellow;
+    // max-height: 500px;
+    box-shadow: 0px 0px 5px black;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    //   position: relative;
+    img {
+      width: 60%;
+      object-fit: cover;
+      display: block !important;
+    }
+    .loginForm {
+      max-width: 40%;
+      height: 100%;
+      //   background-color: black;
+    }
+  }
+}

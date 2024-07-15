@@ -1,0 +1,36 @@
+.btn__up {
+  position: fixed;
+  right: 10px;
+  bottom: 50px;
+  background-color: #00000036 !important;
+  border: none !important;
+  outline: none;
+  font-size: 2.5rem !important;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  //   box-shadow: 0 0 10px rgba(0, 0, 0, 0.126);
+  transition: all 0.3s ease-in;
+  animation: shadowBtn 2s infinite 0s;
+  .icon {
+    width: 100%;
+    height: 100%;
+    color: aliceblue;
+  }
+}
+@keyframes shadowBtn {
+  0% {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.937);
+  }
+  25% {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.09);
+  }
+  50% {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.786);
+  }
+  100% {
+    box-shadow: 0 0 10px rgb(1, 0, 0);
+  }
+}

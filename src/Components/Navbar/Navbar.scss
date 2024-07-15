@@ -1,0 +1,157 @@
+:root {
+  --primaryColor: hsl(14, 90%, 53%);
+  --primaryColorLight: hsl(14, 96%, 91%);
+  --bgColor: hsl(0, 0%, 100%);
+  --formColor: hsl(20, 42%, 87%);
+  --whiteColor: hsl(0, 0%, 100%);
+  --blackColor: hsl(0, 0%, 18%);
+  --greyText: hsl(0, 0%, 51%);
+  --inputColor: hsl(330, 12%, 97%);
+  --cardColor: hsl(300, 3%, 94%);
+  // ----
+  --biggestFontSize: 2.5rem;
+  --h1FontSize: 2rem;
+  --h2FontSize: 1.25rem;
+  --h3FontSize: 1rem;
+  --normalFontSize: 0.938rem;
+  --smallFontSize: 0.813rem;
+  --smallestFontSize: 0.75rem;
+  --borderRadius: 3rem;
+}
+
+.navBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1.5rem 2rem;
+  position: fixed;
+  border-bottom: 1.5px solid rgb(211, 211, 211);
+  //   background: #daa3a3;
+  backdrop-filter: blur(5px);
+  z-index: 1000;
+  .logoDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    span {
+      color: var(--blackColor);
+      font-size: var(--h3FontSize);
+      justify-content: center;
+    }
+  }
+
+  .btns {
+    display: flex;
+    gap: 1.5rem;
+    .signIn {
+      background: white;
+      color: black;
+    }
+  }
+  .active {
+    color: var(--primaryColor) !important;
+    border-bottom: 1.5px solid var(--primaryColor) !important;
+  }
+  @media screen and (max-width: 767px) {
+    .menu {
+      position: absolute;
+
+      width: 70%;
+      top: -100rem;
+      right: 50%;
+      left: 50%;
+      transform: translate(-50%);
+      background: rgba(255, 255, 255, 0.94);
+      padding: 2rem;
+      border-radius: 10px;
+      transition: 0.8s ease-in-out;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 2px 3px 4px rgba(236, 213, 213, 0.516);
+      ul {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1.5rem;
+        .navList {
+          color: black !important;
+          font-size: var(--h3FontSize);
+          font-weight: 500;
+          padding: 1rem 0;
+          text-align: center;
+          cursor: pointer;
+          &:hover {
+            color: var(--primaryColor) !important;
+            border-bottom: 1.5px solid var(--primaryColor) !important;
+          }
+        }
+      }
+    }
+  }
+  .menuIcon,
+  .closeIcon {
+    font-size: var(--h1FontSize);
+    &:hover {
+      color: var(--primaryColor);
+    }
+  }
+  .closeIcon {
+    position: absolute;
+    bottom: -15px;
+    right: 50%;
+    left: 50%;
+    transform: translate(-50%);
+    color: var(--blackColor);
+  }
+  .showNavbar {
+    top: 8rem;
+  }
+}
+// media queries
+@media screen and (min-width: 768px) {
+  .navBar {
+    .logoDiv {
+      .span {
+        font-size: var(--h2FontSize);
+      }
+    }
+    .closeIcon,
+    .menuIcon {
+      display: none;
+    }
+    .menu {
+      ul {
+        display: flex;
+        gap: 1rem;
+        .navList {
+          color: var(--textColor);
+          font-size: var(--h3FontSize);
+          font-weight: 500;
+          padding: 1rem 0;
+          text-align: center;
+          cursor: pointer;
+          &:hover {
+            color: var(--primaryColor) !important;
+            border-bottom: 1.5px solid var(--primaryColor) !important;
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (min-width: 1240px) {
+  .navBar {
+    padding: 2rem 6rem;
+    .menu {
+      ul {
+        gap: 4rem;
+      }
+    }
+  }
+}
+@media screen and (min-width: 1440px) {
+  .navBar {
+    padding: 2rem 14rem;
+  }
+}
