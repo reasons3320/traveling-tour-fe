@@ -1,7 +1,6 @@
 import React from "react";
 import "./AuthPage.scss";
 import scenic from "../../assets/scenic.jpg";
-import LoginPage from "../LoginPage";
 import SignIn from "../SignIn/SignIn";
 const AuthPage = () => {
   return (

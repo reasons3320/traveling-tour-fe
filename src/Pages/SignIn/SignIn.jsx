@@ -20,15 +20,21 @@ const SignIn = () => {
   const handleChange = (e) => {
     setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
-  const { mutate: loginMutation, isLoading } = useLoginMutation();
+  const { mutate: loginMutation, isPending } = useLoginMutation();
   const handleClick = async (e) => {
     e.preventDefault();
-    console.log("Form submitted");
+    // console.log("Form submitted");
     loginMutation(credentials, {
       onSuccess: (data) => {
-        toast.success("Login succeed!");
-        dispatch(handleLoginSuccess(data));
-        navigate("/");
+        if (data.success === false) {
+          toast.error("Login failure!");
+          // dispatch(handleLoginSuccess(data));
+          // navigate("/");
+        } else {
+          toast.success("Login succeed!");
+          dispatch(handleLoginSuccess(data?.data));
+          navigate("/");
+        }
       },
       onError: (error) => {
         toast.error("Login failed!");
@@ -74,9 +80,9 @@ const SignIn = () => {
                   <Button
                     className="btn secondary__btn auth__btn"
                     type="submit"
-                    disabled={isLoading}
+                    disabled={isPending}
                   >
-                    {isLoading ? "Logging in..." : "Login"}
+                    {isPending ? "Logging in..." : "Login"}
                   </Button>
                 </Form>
                 <p>

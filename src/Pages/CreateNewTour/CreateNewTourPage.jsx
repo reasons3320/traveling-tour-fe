@@ -30,7 +30,7 @@ const CreateNewTourPage = () => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user.user);
   const [selectedTypes, setSelectedTypes] = useState();
-
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     userId: user?._id,
     // Add more fields as needed
@@ -39,8 +39,8 @@ const CreateNewTourPage = () => {
   const { data: tour, isError, isLoading } = useGetSingleTourQuery(tourId);
   const { title, city, address, price, maxGroupSize, types, desc, photo } =
     tour || {};
-  const { mutate: createNewTourMutate } = useCreateTourQuery(); // console.log("TOur lay dc la", tour);
-  // console.log("TOur lay dc la", types);
+  const { mutate: createNewTourMutate, isPending } = useCreateTourQuery(); // console.log("TOur lay dc la", tour);
+  // console.log("TOur lay dc la", types);x`
 
   // types?.map((item) => {
   //   console.log("tourtypes", item);
@@ -55,7 +55,7 @@ const CreateNewTourPage = () => {
     const selectedValues = [];
     for (const option of options) {
       if (option.selected) {
-        console.log("Selected options", option.value);
+        // console.log("Selected options", option.value);
         selectedValues.push(option.value);
       }
     }
@@ -66,13 +66,20 @@ const CreateNewTourPage = () => {
     // console.log(e.target.files[0]);
     const image = e.target.files[0];
     if (image) {
+      setLoading(true);
       const storage = getStorage(app);
       const storageRef = ref(storage, "images/" + image.name);
-      await uploadBytes(storageRef, image);
-      const downloadURL = await getDownloadURL(storageRef);
-      console.log(downloadURL);
-      if (downloadURL) {
-        setFormData({ ...formData, photo: downloadURL });
+      try {
+        await uploadBytes(storageRef, image);
+        const downloadURL = await getDownloadURL(storageRef);
+        console.log(downloadURL);
+        if (downloadURL) {
+          setFormData({ ...formData, photo: downloadURL });
+        }
+      } catch (error) {
+        console.error("Error uploading image:", error);
+      } finally {
+        setLoading(false);
       }
     }
   };
@@ -110,7 +117,12 @@ const CreateNewTourPage = () => {
       ></div>
       <div className="mainPart">
         <h2>{tourId ? "Update Tour" : "New Tour"}</h2>
-        <Form onSubmit={handleSubmit}>
+        <Form
+          onSubmit={handleSubmit}
+          style={{
+            width: "60%",
+          }}
+        >
           <FormGroup row>
             <Label for="exampleEmail" sm={2}>
               Title
@@ -251,10 +263,7 @@ const CreateNewTourPage = () => {
                 ref={imageRef}
                 required={formData?.photo ? false : true}
                 style={{
-                  display:
-                    formData?.photo !== "" || formData?.photo !== "undefined"
-                      ? "none"
-                      : "block",
+                  display: formData?.photo ? "none" : "block",
                 }}
               />
             </Col>
@@ -264,7 +273,6 @@ const CreateNewTourPage = () => {
             <Col
               style={{
                 width: "100%",
-
                 textAlign: "center",
               }}
             >
@@ -273,8 +281,9 @@ const CreateNewTourPage = () => {
                   border: "none",
                   backgroundColor: "#faa935",
                 }}
+                disabled={isLoading}
               >
-                Submit
+                {isLoading ? "Submitting" : "Submit"}
               </Button>
             </Col>
           </FormGroup>

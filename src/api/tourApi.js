@@ -80,26 +80,36 @@ export const getSingleTour = async (tourId) => {
 };
 export const createNewTour = async (tour) => {
   console.log("tour nhan dc khi create la", tour);
-  const response = await fetch(`${FETCH_URL}tours`, {
-    method: "post",
-    headers: {
-      "content-type": "application/json",
-    },
-    credentials: "include",
-    body: JSON.stringify({
-      userId: tour.userId,
-      title: tour.title,
-      city: tour.city,
-      address: tour.address,
-      price: tour.price,
-      types: tour.types,
-      maxGroupSize: tour.maxGroupSize || 5,
-      desc: tour.desc,
-      reviews: [],
-      photo: tour.photo ? tour.photo : "empty string",
-      featured: true,
-    }),
-  });
+  try {
+    const response = await fetch(`${FETCH_URL}tours`, {
+      method: "post",
+      headers: {
+        "content-type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({
+        userId: tour.userId,
+        title: tour.title,
+        city: tour.city,
+        address: tour.address,
+        price: tour.price,
+        types: tour.types,
+        maxGroupSize: tour.maxGroupSize || 5,
+        desc: tour.desc,
+        reviews: [],
+        photo: tour.photo ? tour.photo : "empty string",
+        featured: true,
+      }),
+    });
+    if (!response.ok) {
+      const error = response.json();
+      return error;
+    }
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.log(error.message);
+  }
   // .then((res) => {
   //   console.log(res);
   //   return res.json();
@@ -142,37 +152,21 @@ export const updateTour = async (tour, tourId, toast) => {
   }
 };
 export const deleteTour = async (tourId) => {
+  // console.log("tour nhan dc khi delete la la", tourId);
   try {
-    console.log("tour nhan dc khi delete la la", tourId);
     const response = await fetch(`${FETCH_URL}tours/${tourId}`, {
       method: "delete",
       headers: {
         "content-type": "application/json",
       },
       credentials: "include",
-    })
-      .then((response) => {
-        console.log(response);
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .catch((error) =>
-        console.error(
-          "There has been a problem with your fetch operation:",
-          error
-        )
-      );
-    // if (!response.ok) {
-    //   console.log("response cua delete", response);
-    //   return toast.error("Can not delete this tour !");
-    // }
-
-    // const res = await response.json();
-    // toast.success("Delete tour succeed !");
-    // return res.data;
-  } catch (error) {
-    console.log(error.message);
-  }
+    });
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || "Failed to delete tour");
+    }
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch (error) {}
 };

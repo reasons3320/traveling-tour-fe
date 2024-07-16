@@ -3,7 +3,6 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import LoginPage from "./Pages/LoginPage";
 import NotFoundPage from "./Pages/NotFoundPage";
 import AboutUsPage from "./Pages/AboutUs/AboutUsPage";
 import HomePage from "./Pages/HomePage";
@@ -20,6 +19,7 @@ import CreateNewTourPage from "./Pages/CreateNewTour/CreateNewTourPage";
 import Profile from "./Pages/Profile/Profile";
 import { Helmet } from "react-helmet";
 import BlogDetail from "./Pages/Blogs/BlogDetail";
+import SignUp from "./Pages/SignUp/SignUp";
 // Import all of Bootstrap's CSS
 const router = createBrowserRouter([
   {
@@ -72,6 +72,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <SignIn />,
+  },
+  {
+    path: "/register",
+    element: <SignUp />,
   },
 ]);
 const queryClient = new QueryClient();

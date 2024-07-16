@@ -4,17 +4,34 @@ import { Link, useNavigate } from "react-router-dom";
 import "./SignUp.scss";
 import loginImg from "../../assets/login.png";
 import userIcon from "../../assets/user.png";
+import { useRegisterMutation } from "../../helper/authQuery";
+import toast from "react-hot-toast";
 const SignUp = () => {
   const [credentials, setCredentials] = useState({
     email: undefined,
     password: undefined,
+    confirmPassword: undefined,
+    phone: undefined,
   });
   const navigate = useNavigate();
+  const { mutate: registerMutate, isPending } = useRegisterMutation();
   const handleChange = (e) => {
     setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
   const handleClick = async (e) => {
     e.preventDefault();
+    registerMutate(credentials, {
+      onSuccess: (data) => {
+        console.log(data);
+        if (data.success === false) {
+          toast.error("Your email or username is existed !");
+        } else {
+          toast.success("Sign up successfully.");
+          setCredentials({});
+          navigate("/login");
+        }
+      },
+    });
   };
   return (
     <section>
@@ -42,6 +59,24 @@ const SignUp = () => {
                   </FormGroup>
                   <FormGroup>
                     <input
+                      type="text"
+                      placeholder="Username"
+                      required
+                      id="username"
+                      onChange={handleChange}
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <input
+                      type="text"
+                      placeholder="Phone number"
+                      required
+                      id="phone"
+                      onChange={handleChange}
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <input
                       type="password"
                       placeholder="Password"
                       required
@@ -49,15 +84,25 @@ const SignUp = () => {
                       onChange={handleChange}
                     />
                   </FormGroup>
+                  <FormGroup>
+                    <input
+                      type="password"
+                      placeholder="Confirm password"
+                      required
+                      id="confirmPassword"
+                      onChange={handleChange}
+                    />
+                  </FormGroup>
                   <Button
                     className={"btn secondary__btn auth__btn"}
                     type="submit"
+                    disabled={isPending}
                   >
-                    Login
+                    {isPending ? "Loading..." : "Register"}
                   </Button>
                 </Form>
                 <p>
-                  Don't have an account ? <Link to={"/register"}>Create</Link>
+                  Already have an account ? <Link to={"/login"}>Log in</Link>
                 </p>
               </div>
             </div>

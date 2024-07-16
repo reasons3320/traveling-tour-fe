@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Profile.scss";
 import avt from "../../assets/avt3.jpg";
 import {
@@ -9,6 +9,10 @@ import {
   FormGroup,
   Input,
   Label,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
   Row,
 } from "reactstrap";
 import { Table, Tag } from "antd";
@@ -65,7 +69,9 @@ const historyColumns = [
 const Profile = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-
+  const [modal, setModal] = useState(false);
+  const [tourDetail, setTourDetail] = useState({});
+  const toggle = () => setModal(!modal);
   const user = useSelector((state) => state.user.user) || {};
   const columns = [
     {
@@ -135,16 +141,12 @@ const Profile = () => {
           </Link>
           <MdDeleteOutline
             className="edit-icon"
+            // onClick={() => {
+            //   handleDeleteTour(record._id);
+            // }}
             onClick={() => {
-              deleteTourMutate(record._id, {
-                onSuccess: () => {
-                  refetch();
-                  toast.success("Delete successfully.");
-                },
-                onError: (error) => {
-                  toast.error(`Delete failed: ${error.message}`);
-                },
-              });
+              setModal(true);
+              setTourDetail(record);
             }}
           />
         </>
@@ -156,22 +158,47 @@ const Profile = () => {
     data: tours,
     isLoading,
     isError,
-    refetch,
+    refetch: refetchTours,
   } = useGetToursByUserIdQuery(user?._id);
   const {
     data: bookings,
     isLoading: bookingLoading,
     isError: bookingError,
+    refetch: refetchBookings,
   } = useGetBookingsByUserId(user?._id);
+  console.log(bookings);
   const { mutate: deleteTourMutate, isLoading: deleteLoading } =
     useDeleteTourQuery();
-  // console.log(bookings);
-  // const { tours } = user || [];
+  const handleDeleteTour = () => {
+    deleteTourMutate(tourDetail?._id, {
+      onSuccess: (data) => {
+        console.log(data);
+        if (data?.success === false) {
+          console.log("Data in onSUccess");
+          toast.error("Delete tour failed!");
+          setModal(!modal);
+        } else {
+          console.log("Vao thanh cong xoa");
+          refetchTours();
+          toast.success(data?.message);
+          setModal(!modal);
+        }
+      },
+      onError: (error) => {
+        // Handle error if the mutation fails
+        console.error("Error deleting tour:", error);
+        toast.error("An error occurred while deleting the tour.");
+      },
+    });
+  };
 
   const goToCreatePage = () => {
     return navigate(`/createTour`);
   };
-
+  useEffect(() => {
+    refetchBookings();
+    refetchTours();
+  }, [refetchBookings, refetchTours]);
   return (
     <div className="profileContainer">
       <div className="profileForm">
@@ -272,9 +299,9 @@ const Profile = () => {
                 </Col>
               </Row>
 
-              <div className="d-flex justify-content-center mt-5">
+              {/* <div className="d-flex justify-content-center mt-5">
                 <Button className="btnProfileForm">Submit</Button>
-              </div>
+              </div> */}
             </Form>
           </div>
         </div>
@@ -317,6 +344,18 @@ const Profile = () => {
           </div>
         )}
       </div>
+      <Modal isOpen={modal} toggle={toggle}>
+        <ModalHeader toggle={toggle}>Confirm delete</ModalHeader>
+        <ModalBody>Are you sure to delete {tourDetail?.title} !</ModalBody>
+        <ModalFooter>
+          <Button color="primary" onClick={handleDeleteTour}>
+            Submit
+          </Button>{" "}
+          <Button color="secondary" onClick={toggle}>
+            Cancel
+          </Button>
+        </ModalFooter>
+      </Modal>
     </div>
   );
 };

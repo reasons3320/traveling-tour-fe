@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { DownOutlined, SmileOutlined } from "@ant-design/icons";
 import { Dropdown, Space } from "antd";
 import { Link } from "react-router-dom";
+import { signOut } from "../../api/authApi";
 const items = [
   {
     key: "1",
@@ -29,6 +30,7 @@ const items = [
         }}
         onClick={() => {
           localStorage.removeItem("user");
+          signOut();
         }}
       >
         Log out

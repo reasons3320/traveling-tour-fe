@@ -50,8 +50,6 @@ export const useCreateTourQuery = () => {
 };
 export const useDeleteTourQuery = () => {
   return useMutation({
-    mutationFn: (tourId) => {
-      deleteTour(tourId);
-    },
+    mutationFn: (tourId) => deleteTour(tourId),
   });
 };

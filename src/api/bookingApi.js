@@ -1,7 +1,10 @@
+const FETCH_URL = "https://traveling-tour-be.onrender.com/api/v1/";
+
 export const createBooking = async (booking, toast) => {
   console.log("Booking la", booking);
   try {
-    const res = await fetch("http://localhost:4000/api/v1/booking", {
+    const res = await fetch(`${FETCH_URL}booking`, {
+      // const res = await fetch(`http://localhost:4000/api/v1/booking`, {
       method: "post",
       headers: {
         "content-type": "application/json",
@@ -26,7 +29,7 @@ export const createBooking = async (booking, toast) => {
 export const createReviewMassage = async ({ tourId, reviewObj }) => {
   try {
     // console.log("review nhận đc bên api là", tourId, reviewObj);
-    const res = await fetch(`http://localhost:4000/api/v1/review/${tourId}`, {
+    const res = await fetch(`${FETCH_URL}review/${tourId}`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -41,15 +44,15 @@ export const createReviewMassage = async ({ tourId, reviewObj }) => {
   }
 };
 export const getBookingsByUserId = async (userId) => {
-  // console.log("userID ben bookings API", userId);
+  console.log("userID ben bookings API", userId);
   try {
-    const response = await fetch(
-      `http://localhost:4000/api/v1/booking/findByUser/${userId}`,
-      {
-        method: "get",
-        credentials: "include",
-      }
-    );
+    const response = await fetch(`${FETCH_URL}booking/findByUser/${userId}`, {
+      // const response = await fetch(
+      //   `http://localhost:4000/api/v1/booking/findByUser/${userId}`,
+      //   {
+      method: "get",
+      credentials: "include",
+    });
     const result = await response.json();
     // console.log("bookings by user id", result.data);
     return result.data || [];
