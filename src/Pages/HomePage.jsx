@@ -18,7 +18,8 @@ const HomePage = () => {
       {/* <Navbar /> */}
       {/* Add more comments to test git command in Home Page */}
       {/* Test again at 2:51 pm */}
-      {/* Add more test at 2:53 pm */}
+      {/*I lose this command so now I pushed again  "Add more test at 3:06 pm" */}
+
       <Home />
       <Middle />
       <Destinations />
