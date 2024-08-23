@@ -3,19 +3,13 @@ import "./BlogCard.scss";
 import scene from "../../assets/traveling.jpg";
 import Aos from "aos";
 import "aos/dist/aos.css";
-import { limitCharacters } from "../../data/blogs";
-import { useNavigate } from "react-router-dom";
 const BlogCard = ({ blog }) => {
-  const navigate = useNavigate();
-  const { id, email, photo, likes, createDate, content } = blog || {};
-  const handleNavigate = () => {
-    navigate(`/blogDetail/${id}`);
-  };
+  const { email, photo, likes, createDate, content } = blog || {};
   useEffect(() => {
     Aos.init({ duration: 2000 });
   }, []);
   return (
-    <div class="blogCard" data-aos="fade-up" onClick={handleNavigate}>
+    <div class="blogCard" data-aos="fade-up">
       <img src={photo} alt="Scenic view of Portugal" data-aos="fade-up" />
       <div class="blogCard-content" data-aos="fade-up">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
@@ -33,9 +27,7 @@ const BlogCard = ({ blog }) => {
           ></path>
         </svg>
         {/* <div class="blogCard-title">Portugal: A Tapestry History</div> */}
-        <div class="blogCard-description">
-          <p>{limitCharacters(content)}</p>
-        </div>
+        <div class="blogCard-description">{content}</div>
       </div>
     </div>
   );

@@ -16,7 +16,8 @@ const HomePage = () => {
   return (
     <>
       {/* <Navbar /> */}
-      {/* Add more comments to test git command in Home Page */}
+
+      {/* What changes After revert  */}
       <Home />
       <Middle />
       <Destinations />
