@@ -12,18 +12,18 @@ const Footer = () => {
     <div className="footer">
       <div className="secContainer container grid">
         <div className="logoDiv">
-          <div className="footerLogo" data-aos="fade-up">
+          <div className="footerLogo" >
             <BiLogoMediumOld className="icon" />
             <span>OU-Trips</span>
           </div>
-          <div className="socials flex" data-aos="fade-up">
-            <ImFacebook className="icon" data-aos="fade-up" />
-            <ImInstagram className="icon" data-aos="fade-up" />
-            <ImYoutube className="icon" data-aos="fade-up" />
+          <div className="socials flex">
+            <ImFacebook className="icon" />
+            <ImInstagram className="icon" />
+            <ImYoutube className="icon" />
           </div>
         </div>
-        <div className="footerLinks" data-aos="fade-up">
-          <span className="linkTitle" data-aos="fade-up">
+        <div className="footerLinks" >
+          <span className="linkTitle" >
             Information
           </span>
           <li>
@@ -39,8 +39,8 @@ const Footer = () => {
             <a href="#">Blog</a>
           </li>
         </div>
-        <div className="footerLinks" data-aos="fade-up">
-          <span className="linkTitle" data-aos="fade-up">
+        <div className="footerLinks" >
+          <span className="linkTitle" >
             Helpful Links
           </span>
           <li>
@@ -56,8 +56,8 @@ const Footer = () => {
             <a href="#">Privacy</a>
           </li>
         </div>
-        <div className="footerLinks" data-aos="fade-up">
-          <span className="linkTitle" data-aos="fade-up">
+        <div className="footerLinks">
+          <span className="linkTitle" >
             Contact Details
           </span>
           <span className="phone">+038 461 9027</span>

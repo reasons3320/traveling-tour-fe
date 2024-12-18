@@ -2,35 +2,74 @@
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
-  // padding: 2rem;
   position: relative;
   .Distance {
-    position: fixed;
-    // height: 150px;
-    // background-color: black;
     background-image: url(../../assets/background.jpg);
     background-size: cover;
     background-repeat: no-repeat;
+    background-position: center;
     // margin-top: 125px;
-    height: 100%;
+    height: 500px;
     width: 100%;
-    z-index: -999;
+    z-index: -9999;
   }
   .aboutUsTitle {
-    margin-top: 150px;
     width: 100%;
     text-align: center;
+    position: absolute;
+    top: 100px;
     h1 {
       color: white;
     }
   }
-  .firstParagraph {
+  .firstSection {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    position: absolute;
+    top:300px;
+    background-color: wheat;
+    box-shadow: 0 0 10px wheat;
     gap: 2.5rem;
-    width: 100%;
+    width: 90%;
+    left: 50%;
+    translate: -50% 0;
+    border-top-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    padding: 20px;
+    max-height: 400px;
+    overflow-y: auto;
+    .firstSection-aboutUs{
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      height: 100%;
+      .firstSection-aboutUs-title{
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        gap: 20px;
+        border-bottom:solid 2px red;
+        padding: 10px;
+        cursor: pointer;
+        transition: all .5s ease-in-out;
+        &:hover{
+          color: cadetblue;
+        }
+        .aboutUs--icon{
+          font-size: 30px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        .aboutUs--title{
+          font-size: 15px;
+          font-weight: 500;
+        }
+      }
+    }
     .textContent {
       width: 100%;
       display: flex;
@@ -38,40 +77,81 @@
       gap: 1.5rem;
       text-align: center;
       h1 {
-        color: white;
+        color: black;
       }
       p {
-        color: white;
+        color:black;
         font-weight: 500;
         font-size: 1.5rem;
       }
     }
-    .imgContainer {
-      width: 50%;
+    .firstSection-imgContainer {
+      height: 100%;
+      width: 100%;
       img {
         width: 100%;
+        height: 100%;
         border-radius: 20px;
       }
     }
+    .firstSection-content{
+      width: 100%;
+      display: flex;
+      justify-content: start;
+      align-items: start;
+      position: relative;
+      .content--item{
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+        top: 0;
+        h6{
+          text-decoration: underline dashed;
+        }
+        p{
+          font-size: 1rem;
+        }
+      }
+    }
   }
-  .secondParagraph {
-    // background-color: antiquewhite;
+  .secondSection {
     padding: 1.5rem 1.5rem;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     gap: 2.5rem;
     width: 100%;
+    margin-top: 160px;
     .textContent {
-      background-color: antiquewhite;
-      overflow: scroll;
+      background-color: wheat;
       border-radius: 20px;
       padding: 1.5rem;
-      width: 50%;
+      width: 100%;
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
-      height: 550px;
+      min-height: 550px;
+      height: 100%;
+      .values-section{
+        .values-card{
+          background: rgba(255, 255, 255, 0.538);
+          .ant-card-body{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+          }
+        }
+        .values-section-tag{
+          padding: 10px;
+          overflow-y: scroll;
+          background: transparent;
+          border: none;
+        }
+      }
       h1 {
         color: var(--h1FontSize);
       }
@@ -92,69 +172,47 @@
     }
   }
 }
-@media screen and (max-width: 640px) {
-  .firstParagraph {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    gap: 2.5rem;
-    width: 100%;
-    .textContent {
-      width: 100% !important;
-      padding: 4px;
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      h1 {
-        color: 2.5rem;
-      }
-      p {
-        color: var(--textColor);
-        font-weight: 500;
-      }
-    }
-    .imgContainer {
-      display: none;
-      width: 50%;
-      img {
+@media screen and (min-width:767px) {
+  .containerAboutUs{
+    .firstSection{
+      .firstSection-imgContainer{
+        max-width: 400px;
         width: 100%;
-        border-radius: 20px;
+        height: 300px;
+        img{
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .firstSection-content{
+        width: 100%;
       }
     }
   }
-  .secondParagraph {
-    background-color: antiquewhite;
-    padding: 4px;
-    display: flex;
-    border-radius: 20px;
-    justify-content: space-between;
-    align-items: center;
-    gap: 2.5rem;
-    width: 100%;
-    .textContent {
-      width: 100% !important;
+}
+@media screen and (min-width:976px) {
+  .containerAboutUs{
+    .firstSection{
       display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      padding: 4px;
-      h1 {
-        color: var(--h1FontSize);
-      }
-      p {
-        color: var(--textColor);
-        font-weight: 500;
-      }
-    }
-    .imgContainer {
-      width: 50%;
-      display: none;
-      img {
+      flex-direction: row;
+      .firstSection-imgContainer{
+        max-width: 400px;
         width: 100%;
-        height: 500px;
-        border-radius: 20px;
-        display: none;
+        height: 300px;
+        img{
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .firstSection-content{
+        width: 100%;
+        height: 100%;
+        min-height: 300px;
       }
     }
   }
+}
+// active section
+.active {
+    color: rgb(110, 215, 218);
 }

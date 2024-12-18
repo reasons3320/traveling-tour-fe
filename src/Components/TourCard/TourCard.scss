@@ -6,95 +6,140 @@
   --font-name: "Montserrat", sans-serif;
   --subtitle-font-name: "Island Moments", cursive;
 }
+
 .tour__card {
-  min-width: 250px;
+  width: 100%;
+  margin-bottom: 10px;
 }
+
+.tour__img {
+  position: relative;
+  overflow: hidden;
+}
+
 .tour__img img {
   width: 100%;
-  border-radius: 5px 5px 0 0;
   height: 180px;
+  border-radius: 5px 5px 0 0;
+  transition: all 0.5s ease-in-out;
 }
+
+.tour__img img:hover {
+  transform: scale(1.2);
+}
+
 .card {
   border: none !important;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;
 }
-.tour__img {
-  position: relative;
+
+.card__top .card__position {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 4px;
 }
+
+.card__top .card__position span {
+  font-size: 0.8rem;
+  color: var(--secondary-color);
+}
+
+.card__top .city {
+  font-weight: 500;
+  font-size:.8rem;
+  color: var(--primary-color);
+  display: inline;
+  max-width: 100%;
+  overflow: auto;
+}
+
 .tour__img span {
   position: absolute;
   bottom: 0;
   right: 0;
-  width: max-content;
-  height: max-content;
-  z-index: 10;
   background: var(--primary-color);
   color: #fff;
-  padding: 0.3rem 0.5rem;
   border-radius: 3px 0 0 0;
+  z-index: 10;
 }
+
 .card__top span i {
   color: var(--secondary-color);
 }
-.tour__rating {
+
+.tour__rating, .tour__location {
   font-size: 0.9rem;
+}
+
+.tour__rating {
   color: var(--text-color);
 }
+
 .tour__location {
   color: var(--heading-color);
+  background-color: #6e7074;
 }
-.tour__rating i,
-.tour__location i {
+
+.tour__rating i, .tour__location i {
   font-size: 1rem;
 }
+
 .tour__title {
   margin-top: 1rem;
   font-size: 1.1rem;
   cursor: pointer;
 }
+
 .tour__title a {
   text-decoration: none;
   color: var(--heading-color);
   transition: 0.3s;
 }
+
 .tour__title a:hover {
   color: var(--secondary-color);
 }
+
 .card__bottom h5 {
   color: var(--secondary-color);
-  font-size: 1.1rem;
-  font-weight: 700;
+  font-size: 0.8rem;
+  max-width: 70%;
 }
+
 .card__bottom h5 span {
   font-weight: 500;
   color: var(--text-color);
-  font-size: 0.8rem;
 }
+
 .booking__btn {
-  background: var(--secondary-color) !important;
   cursor: pointer;
-  padding: 0.2rem 0.5rem;
 }
+
 .booking__btn a {
   text-decoration: none;
   font-size: 0.9rem;
   color: #fff;
 }
+
 .booking__btn a:hover {
   color: #fff;
 }
+
 @media only screen and (max-width: 576px) {
   .tour__title {
     font-size: 1rem;
   }
+
   .booking__btn a {
     font-size: 0.8rem;
   }
+
   .booking__btn {
     padding: 0.3rem 0.5rem !important;
   }
-  .tour__location,
-  .tour__rating {
+
+  .tour__location, .tour__rating {
     font-size: 0.8rem;
   }
 }

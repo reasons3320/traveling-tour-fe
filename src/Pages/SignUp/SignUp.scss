@@ -83,3 +83,19 @@
     padding-bottom: 1rem;
   }
 }
+@media screen and (min-width:976px) {
+  .login__form{
+    width: 50%;
+  }
+  .login__img{
+    width: 50%;
+    position: relative;
+    img{
+      position: absolute;
+      width: 100%;
+      left: 0;
+      top: 50%;
+      translate: 0 -50%;
+    }
+  }
+}

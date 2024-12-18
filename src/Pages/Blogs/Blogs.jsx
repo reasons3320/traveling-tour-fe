@@ -19,10 +19,10 @@ const Blogs = () => {
         <p>Check out all our blogs for the best tour experience</p>
       </div>
       <Container className="blogCardContainer" data-aos="fade-up">
-        <Row className="gap-5 w-full justify-content-center">
+        <Row className="row row-cols-1  row-cols-sm-4 row-cols-md-2 row-cols-lg-3  w-full justify-content-start m-0 p-0 gap-0">
           {blogs.map((blog) => (
-            <Col lg="3" md="4" sm="12" className="g-5" key={blog?.id}>
-              <BlogCard blog={blog} key={blog?.id} />
+            <Col className="d-flex justify-content-center mb-2" key={blog?.id}>
+              <BlogCard  blog={blog} key={blog?.id} />
             </Col>
           ))}
         </Row>

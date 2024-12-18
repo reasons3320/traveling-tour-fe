@@ -18,6 +18,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     position: absolute;
+    z-index: -99;
   }
   .blogCardContainer {
     display: flex;
@@ -26,7 +27,6 @@
     width: 80%;
   }
   .blogTitle {
-    z-index: 9999;
     text-align: center;
     h3 {
       font-weight: 700;

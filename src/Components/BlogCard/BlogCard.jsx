@@ -16,8 +16,9 @@ const BlogCard = ({ blog }) => {
   }, []);
   return (
     <div class="blogCard" data-aos="fade-up" onClick={handleNavigate}>
+      <div className="blogCard__imgWrapper">
       <img src={photo} alt="Scenic view of Portugal" data-aos="fade-up" />
-      <div class="blogCard-content" data-aos="fade-up">
+      <div className="blogCard__waveSvg">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
           <path
             fill="white"
@@ -32,6 +33,10 @@ const BlogCard = ({ blog }) => {
             d="M0,288L21.8,261.3C43.6,235,87,181,131,160C174.5,139,218,149,262,133.3C305.5,117,349,75,393,53.3C436.4,32,480,32,524,53.3C567.3,75,611,117,655,160C698.2,203,742,245,785,245.3C829.1,245,873,203,916,192C960,181,1004,203,1047,197.3C1090.9,192,1135,160,1178,170.7C1221.8,181,1265,235,1309,240C1352.7,245,1396,203,1418,181.3L1440,160L1440,320L1418.2,320C1396.4,320,1353,320,1309,320C1265.5,320,1222,320,1178,320C1134.5,320,1091,320,1047,320C1003.6,320,960,320,916,320C872.7,320,829,320,785,320C741.8,320,698,320,655,320C610.9,320,567,320,524,320C480,320,436,320,393,320C349.1,320,305,320,262,320C218.2,320,175,320,131,320C87.3,320,44,320,22,320L0,320Z"
           ></path>
         </svg>
+        </div>
+      </div>
+      <div class="blogCard-content" data-aos="fade-up">
+    
         {/* <div class="blogCard-title">Portugal: A Tapestry History</div> */}
         <div class="blogCard-description">
           <p>{limitCharacters(content)}</p>

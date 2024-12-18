@@ -1,17 +1,14 @@
-import React, { useContext, useRef, useState } from "react";
+import React, {useState } from "react";
 import "./Booking.scss";
 import { Form, FormGroup, ListGroup, ListGroupItem, Button } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useBookingTourQuery } from "../helper/bookingQuery";
-// import { AuthContext } from "../../context/AuthContext";
-// import { BASE_URL } from "../../utils/config";
 import toast from "react-hot-toast";
 import { createBooking } from "../api/bookingApi";
 const Booking = ({ tour, avgRating }) => {
   const navigate = useNavigate();
   const { price, reviews, title, maxGroupSize } = tour || {};
-  console.log("Tour of booking", tour);
   const user = useSelector((state) => state.user.user);
   const [booking, setBooking] = useState({
     userId: user && user._id,
@@ -28,9 +25,6 @@ const Booking = ({ tour, avgRating }) => {
   const serviceFee = 10;
   const totalAmount =
     Number(price) * Number(booking.guestSize) + Number(serviceFee);
-  const { mutate: createBookingMutate } = useBookingTourQuery();
-
-  //   send data to the server
   const handleClick = async (e) => {
     e.preventDefault();
     if (!user || user === undefined || user === null) {
@@ -45,12 +39,6 @@ const Booking = ({ tour, avgRating }) => {
         navigate("/thank-you");
       }
     });
-
-    // try {
-    //   toast.success("Booking successfully created!");
-    // } catch (error) {
-    //   toast.error(`Failed to create booking`);
-    // }
   };
   return (
     <div className="booking">
@@ -88,15 +76,17 @@ const Booking = ({ tour, avgRating }) => {
               onChange={handleChange}
             />
           </FormGroup>
-          <FormGroup className={"d-flex align-items-center gap-3"}>
+          <FormGroup className={"d-flex  align-items-center gap-3 bg-primary"}>
             <input
               type="date"
-              placeholder=""
+              placeholder="01/01/2024"
               id="bookAt"
               required
               onChange={handleChange}
             />
-            <input
+          </FormGroup>
+          <FormGroup>
+          <input
               type="number"
               placeholder="Guest"
               id="guestSize"

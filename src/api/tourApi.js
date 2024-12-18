@@ -1,10 +1,11 @@
+import { convertToStandardQueryParams } from "../utils/convertArrayParams";
 const FETCH_URL = "https://traveling-tour-be.onrender.com/api/v1/";
-export const getTours = async (page) => {
-  // console.log("page la", filters);
+export const getTours = async (params) => {
+    const newParams = convertToStandardQueryParams(params)
   try {
     // const response = await fetch(`${FETCH_URL}/api/v1/tours?page=${page}`);
     // https://traveling-tour-be.onrender.com/api/v1/tours?page=0
-    const response = await fetch(`${FETCH_URL}tours?page=0`, {
+    const response = await fetch(`${FETCH_URL}tours?${newParams}`,{
       method: "get",
       credentials: "include",
       headers: {
@@ -17,7 +18,7 @@ export const getTours = async (page) => {
     }
     // await new Promise((resolve) => setInterval(resolve, 10000));
     const result = await response.json();
-    return result?.data || [];
+    return result || {};
   } catch (error) {
     console.log(error.message);
   }

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import img1 from "../../assets/call2.jpg";
+import img1 from "../../assets/walkonyard.jpg";
 
 import "./Subscribe.scss";
 import Aos from "aos";
@@ -11,7 +11,7 @@ const Subscribe = () => {
   return (
     <div className="subscribe section container">
       <div className="secContainer grid">
-        <img src={img1} alt="" data-aos="fade-up" />
+        <img src={img1} alt="" data-aos="fade-up"  style={{borderRadius:"10px"}}/>
         <div className="textDiv">
           <h4 data-aos="fade-up">Best Way To Start Your Journey!</h4>
           <p data-aos="fade-up">

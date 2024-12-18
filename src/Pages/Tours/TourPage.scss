@@ -1,17 +1,25 @@
 .tourContainer {
-  width: 100%;
+  box-sizing: border-box;
   height: 100%;
   min-height: 900px;
-  padding: 2rem;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+  padding: 10px 5px;
+  .mainSide {
+    width: 100%;
+  }
+
   .leftBar {
-    width: 20%;
+    width: 100%;
     height: 60%;
+    margin-top: 100px;
+    margin-bottom: 20px;
+
     .searchBar {
       top: 160px;
       // position: fixed;
+      box-sizing: border-box;
       padding: 1rem;
       border-radius: 20px;
       height: 50%;
@@ -32,10 +40,42 @@
     }
   }
   .rightSide {
+    position: relative;
     width: 100%;
     height: 100%;
     border-radius: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.23);
+    gap: 20px;
+    // padding: 0 0 60px 0;
+    .data-container {
+      .data-row {
+        margin-bottom: 50px !important;
+      }
+    }
+    .paging-section {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      max-width: 700px;
+      position: absolute;
+      bottom: 10px;
+    }
+    .empty-tag {
+      height: 100%;
+      min-height: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      left: 50%;
+      translate: -50% 0;
+    }
+    .imgContainer {
+      width: 60%;
+      height: 60%;
+      margin: auto;
+    }
   }
 }
 .pagination span {
@@ -56,38 +96,44 @@
   background: var(--secondary-color);
   color: #fff !important;
 }
-@media screen and (max-width: 980px) {
+@media screen and (min-width: 767px) {
   .tourContainer {
+    padding: 0;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    justify-content: start;
     align-items: center;
-    justify-content: center;
     width: 100%;
-    .leftBar {
-      width: 100%;
-      height: 60%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 1.5rem;
-      .searchBar {
-        width: 80%;
-        padding: 1rem;
-        border-radius: 20px;
-        height: 40%;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.23);
-        .form-check {
-          display: flex;
-        }
-        .searchBarItems {
+    .mainSide {
+      margin-top: 100px;
+      .leftBar {
+        margin-top: 0px;
+        width: 100%;
+        height: 60%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+        .searchBar {
           width: 100%;
-          display: flex;
-          justify-content: space-around;
-          margin: 10px 0;
-          Input {
-            box-shadow: 0 0 3px green($color: #000000);
-            &:focus {
-              outline: none;
+          padding: 1rem;
+          border-radius: 20px;
+          height: 40%;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.23);
+          .form-check {
+            display: flex;
+          }
+          .searchBarItems {
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            margin: 10px 0;
+            Input {
+              box-shadow: 0 0 3px green($color: #000000);
+              &:focus {
+                outline: none;
+              }
             }
           }
         }
@@ -95,10 +141,9 @@
     }
   }
 }
-@media screen and (min-width: 980px) {
+@media screen and (min-width: 976px) {
   .tourContainer {
     display: flex;
-    flex-direction: column;
     height: 100%;
     width: 100%;
     min-height: 1000px;
@@ -117,20 +162,43 @@
       width: 100%;
       height: 100%;
       justify-content: space-between;
+      padding: 10px;
+      box-sizing: border-box;
       .leftBar {
-        min-height: 680px;
+        display: flex;
+        justify-content: flex-start;
+        width: 20%;
         .searchBar {
           // position: fixed;
-          width: 250px;
+          width: 100%;
+          // width: 250px;
+          .searchBarsCheckBoxes {
+            display: flex;
+            flex-direction: column;
+          }
         }
       }
       .rightSide {
-        width: 80% !important;
+        width: 78%;
         height: 100%;
-        min-height: 600px;
+        min-height: 800px;
         border-radius: 20px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.23);
+        .data-container {
+          padding: 2px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          // background-color: bisque;
+          height: 100%;
+          width: 100%;
+          margin-bottom: 60px;
+        }
       }
     }
   }
+}
+// custom value
+.custom-w-45 {
+  width: 45%;
 }

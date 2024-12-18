@@ -10,10 +10,10 @@ import {
 } from "../api/tourApi";
 import { createReviewMassage } from "../api/bookingApi";
 
-export const useToursQuery = (page) => {
+export const useToursQuery = (params) => {
   return useQuery({
-    queryKey: ["tours", page || 0],
-    queryFn: () => getTours(page),
+    queryKey: ["tours", params || []],
+    queryFn: () => getTours(params),
   });
 };
 export const useGetToursByUserIdQuery = (userId) => {

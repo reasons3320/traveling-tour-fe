@@ -1,9 +1,9 @@
 .login__img {
-  width: 60%;
+  width: 50%;
   text-align: center;
 }
 .login__img img {
-  width: 70%;
+  width: 100%;
   object-fit: cover;
 }
 .login__form {
@@ -13,7 +13,8 @@
 }
 .login__container {
   box-shadow: rgba(17, 12, 46, 0.25) 0px 48px 100px 0px;
-  margin-top: 100px;
+  width: 70%;
+  margin: auto;
 }
 .login__form .user {
   width: 80px;
@@ -49,6 +50,7 @@
   background: var(--heading-color) !important;
   width: 100%;
   color: #fff !important;
+  height: 50px;
 }
 .login__form p {
   font-size: 0.9rem;
@@ -66,20 +68,15 @@
   .login__img {
     display: none;
   }
-  .login__form {
-    width: 70%;
-    margin: auto;
-  }
   .login__container {
-    padding-bottom: 3rem;
-    margin-top: 70px;
+    width:100%;
+    margin: auto;
+    height: 100% !important;
   }
 }
 @media only screen and (max-width: 576px) {
-  .login__form {
-    width: 100%;
-  }
   .login__container {
-    padding-bottom: 1rem;
+    width: 100%;
+    height: 100%;
   }
 }

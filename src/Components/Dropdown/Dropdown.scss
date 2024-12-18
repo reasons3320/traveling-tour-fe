@@ -1,8 +1,22 @@
+
 .userPart {
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
+  gap: 2px;
+  cursor: pointer;
+  width: 100%;
+  .username-tag{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: .8rem;
+    color: black;
+    transition: all 0.3s ease-in;
+    font-weight: 500;
+    &:hover {
+      color: var(--primaryColorLight);
+    }
+  }
   .icon {
     font-size: 1.5rem;
     color: black;

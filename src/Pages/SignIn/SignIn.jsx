@@ -43,10 +43,6 @@ const SignIn = () => {
   };
 
   return (
-    <section>
-      <Container>
-        <Row>
-          <Col lg="8" className="m-auto">
             <div className="login__container d-flex justify-content-between">
               <div className="login__img">
                 <img src={loginImg} alt="" />
@@ -56,7 +52,12 @@ const SignIn = () => {
                   <img src={userIcon} alt="" />
                 </div>
                 <h2>Login</h2>
-                <Form onSubmit={handleClick}>
+                <Form onSubmit={handleClick} style={{
+                  height:"70%",
+                  display:'flex',
+                  flexDirection:'column',
+                  gap:'20px'
+                }}>
                   <FormGroup>
                     <input
                       type="text"
@@ -65,6 +66,9 @@ const SignIn = () => {
                       id="email"
                       onChange={handleChange}
                       value={credentials.email}
+                      style={{
+                        height:50
+                      }}
                     />
                   </FormGroup>
                   <FormGroup>
@@ -75,6 +79,9 @@ const SignIn = () => {
                       id="password"
                       onChange={handleChange}
                       value={credentials.password}
+                      style={{
+                        height:50
+                      }}
                     />
                   </FormGroup>
                   <Button
@@ -90,10 +97,6 @@ const SignIn = () => {
                 </p>
               </div>
             </div>
-          </Col>
-        </Row>
-      </Container>
-    </section>
   );
 };
 

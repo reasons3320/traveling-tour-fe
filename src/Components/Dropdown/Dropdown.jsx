@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./Dropdown.scss";
 import { RxAvatar } from "react-icons/rx";
 import { useSelector } from "react-redux";
-import { DownOutlined, SmileOutlined } from "@ant-design/icons";
 import { Dropdown, Space } from "antd";
 import { Link } from "react-router-dom";
 import { signOut } from "../../api/authApi";
@@ -14,6 +13,7 @@ const items = [
         to={"/profile"}
         style={{
           textDecoration: "none",
+          width:20,
         }}
       >
         Profile
@@ -39,28 +39,26 @@ const items = [
   },
 ];
 const DropdownComponent = () => {
-  //   const [dropdownOpen, setDropdownOpen] = useState(false);
   const user = useSelector((state) => state.user.user) || {};
   const toggle = () => setDropdownOpen((prevState) => !prevState);
   return (
-    <div className="d-flex">
+    <div>
       <Dropdown
+        className="dropdown-c"
         menu={{
           items,
         }}
       >
         <a onClick={(e) => e.preventDefault()}>
-          <Space>
             <div className="userPart">
               <span>
                 <RxAvatar className="icon" />
               </span>
-              <h6>{user?.email}</h6>
+              <span className="username-tag">{user?.email}</span>
             </div>
-          </Space>
         </a>
       </Dropdown>
-    </div>
+      </div>
   );
 };
 

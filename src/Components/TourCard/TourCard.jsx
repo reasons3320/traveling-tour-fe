@@ -23,31 +23,46 @@ const TourCard = ({ tour }) => {
     >
       <Card>
         <div className="tour__img">
-          <img src={photo} alt="" />
-          {featured && <span>Featured</span>}
-        </div>
-        <CardBody>
-          <div className="card__top d-flex align-items-center justify-content-between">
-            <span className="tour__location d-flex align-items-center gap-1">
-              <FaLocationDot /> {city}
-            </span>
-            <span className="tour__rating d-flex align-items-center gap-1">
-              {types?.map((type, index) => (
+        {types?.map((type, index) => (
                 <Tag
                   color={index / 2 === 0 ? "geekblue" : "gold-inverse"}
-                  key={index}
+                  key={index} 
+                  style={{
+                    fontWeight:500,
+                    zIndex:999,
+                    position:'absolute',
+                    top:5,
+                    borderRadius:5,
+                    border:'none',
+                    boxShadow:"0 0 10px purple"
+                  }}
                 >
                   {type.name}
                 </Tag>
               ))}
-            </span>
+          <img src={photo} alt="" />
+          {featured && <span>Featured</span>}
+        </div>
+        <CardBody>
+          <div className="card__top">
+          <div className="tour__rating d-flex align-items-center gap-1">
+         
+            </div>
+            <div className="card__position">
+              <span className="">
+                <FaLocationDot />
+              </span>
+             <div className="city">
+                {city}
+             </div>
+            </div>
           </div>
           <h5 className="tour__title">
             <Link to={`/tours/${_id}`}>{title}</Link>
           </h5>
           <div className="card__bottom d-flex align-items-center justify-content-between mt-3">
             <h5>
-              ${price} <span>/per person</span>
+              ${price}<span>/person</span>
             </h5>
             <button className="btn booking__btn">
               <Link to={`/tours/${_id}`}>Book Now</Link>

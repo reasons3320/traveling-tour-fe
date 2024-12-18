@@ -12,7 +12,7 @@ import img4 from "../../assets/halong4.jpg";
 import { TiLocation } from "react-icons/ti";
 import Aos from "aos";
 import "aos/dist/aos.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useToursQuery } from "../../helper/tourQuery";
 const destinations = [
   {
@@ -62,12 +62,12 @@ const menuLists = [
   },
 ];
 const Destinations = () => {
+  const navigate = useNavigate();
   const [isActive, setIsActive] = useState("All");
   const handleSetActive = (title) => {
     setIsActive(title);
   };
   const { data } = useToursQuery(0, "", []);
-  console.log(data);
   useEffect(() => {
     Aos.init({ duration: 2000 });
   }, []);
@@ -83,25 +83,13 @@ const Destinations = () => {
             Fill in the fields below to find the best spot for your next tour
           </p>
         </div>
-        <div className="searchField grid">
+        {/* <div className="searchField grid">
           <div className="inputField flex" data-aos="fade-up">
             <MdLocationPin className="icon" />
             <input type="text" placeholder="Location" />
           </div>
-          {/* <div className="inputField flex" data-aos="fade-up">
-            <BsCreditCardFill className="icon" />
-            <input type="text" placeholder="Budget" />
-          </div>
-          <div className="inputField flex" data-aos="fade-up">
-            <BsCalendarDateFill className="icon" />
-            <input type="text" placeholder="Date" />
-          </div> */}
-          {/* <div className="btn flex" data-aos="fade-up">
-            <BiSearchAlt className="icon" />
-            Search
-          </div> */}
-        </div>
-        <div className="secMenu">
+        </div> */}
+        {/* <div className="secMenu">
           <ul className="flex" data-aos="fade-up">
             {menuLists.map((item, index) => (
               <li
@@ -114,10 +102,13 @@ const Destinations = () => {
               </li>
             ))}
           </ul>
-        </div>
+        </div> */}
         <div className="destinationContainer grid">
-          {data?.slice(0, 6).map((item) => (
+          {data?.data?.slice(0, 4).map((item) => (
             <div
+            onClick={()=>{
+                navigate("/tours")
+            }}
               className="singleDestination"
               key={item._id}
               data-aos="fade-up"

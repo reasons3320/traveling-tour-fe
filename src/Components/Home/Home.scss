@@ -36,6 +36,7 @@
       padding-left: 2rem;
       padding-right: 2rem;
       font-size: var(--h3FontSize);
+      animation: aboutShadow 2s ease-in-out infinite;
     }
   }
   .popularPlaces {
@@ -140,4 +141,11 @@
       }
     }
   }
+}
+// animate
+@keyframes aboutShadow  {
+  10%   {box-shadow:  0 0 4px rgb(229, 255, 0);}
+  25%   {box-shadow:  0 0 6px #dff669f5;}
+  50%   {box-shadow:  0 0 8px #b5c114ef;}
+  100% {box-shadow:  0 0 10px #0000003a;}
 }

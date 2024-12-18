@@ -35,9 +35,9 @@ const SignUp = () => {
   };
   return (
     <section>
-      <Container>
-        <Row>
-          <Col lg="8" className={"m-auto"}>
+      <Container className="w-100">
+        <Row className="">
+          <Col lg="12" className={"m-auto"}>
             <div className="login__container d-flex justify-content-between">
               <div className="login__img">
                 <img src={loginImg} alt="" />
@@ -46,7 +46,7 @@ const SignUp = () => {
                 <div className="user">
                   <img src={userIcon} alt="" />
                 </div>
-                <h2>Login</h2>
+                <h2>Register</h2>
                 <Form onSubmit={handleClick}>
                   <FormGroup>
                     <input

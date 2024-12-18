@@ -6,7 +6,7 @@ const ThankYouPage = () => {
   return (
     <section
       style={{
-        minHeight: "1000px",
+        minHeight: "100vh",
         display: "flex",
       }}
     >
