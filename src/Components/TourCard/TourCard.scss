@@ -10,11 +10,49 @@
 .tour__card {
   width: 100%;
   margin-bottom: 10px;
+  cursor: pointer;
+  min-width: 250px;
 }
 
 .tour__img {
   position: relative;
   overflow: hidden;
+  .average-rate {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    gap: 5px;
+    background: linear-gradient(to bottom, #000000a3, transparent);
+    padding: 5px;
+    width: 100%;
+    height: 50px;
+    position: absolute;
+    z-index: 999;
+    border-radius: 5px 5px 0 0;
+    .star-icon {
+      color: yellow;
+      font-size: 20px;
+    }
+    .average-rate-number {
+      margin-top: 3px;
+      color: #fff;
+      font-size: 1.3rem;
+    }
+    .average-rate-types {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: end;
+      align-items: center;
+      .types-tag {
+        display: block;
+        background-color: #00000051;
+        color: white;
+        padding: 5px;
+        border-radius: 10px;
+      }
+    }
+  }
 }
 
 .tour__img img {
@@ -35,7 +73,7 @@
 
 .card__top .card__position {
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   align-items: center;
   gap: 4px;
 }
@@ -47,13 +85,25 @@
 
 .card__top .city {
   font-weight: 500;
-  font-size:.8rem;
+  font-size: 1rem;
   color: var(--primary-color);
   display: inline;
   max-width: 100%;
   overflow: auto;
 }
-
+.card__position {
+  .card__top__duration {
+    font-size: 1rem;
+    color: var(--primary-color);
+    font-weight: 500;
+  }
+}
+.card__top__groupSize {
+  margin-top: 10px;
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--primary-color);
+}
 .tour__img span {
   position: absolute;
   bottom: 0;
@@ -68,7 +118,8 @@
   color: var(--secondary-color);
 }
 
-.tour__rating, .tour__location {
+.tour__rating,
+.tour__location {
   font-size: 0.9rem;
 }
 
@@ -81,7 +132,8 @@
   background-color: #6e7074;
 }
 
-.tour__rating i, .tour__location i {
+.tour__rating i,
+.tour__location i {
   font-size: 1rem;
 }
 
@@ -139,7 +191,8 @@
     padding: 0.3rem 0.5rem !important;
   }
 
-  .tour__location, .tour__rating {
+  .tour__location,
+  .tour__rating {
     font-size: 0.8rem;
   }
 }

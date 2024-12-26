@@ -148,11 +148,14 @@ const AboutUsPage = () => {
                       title={item.title}
                       bordered={false}
                     >
-                      {item.values.map((value,index)=>(
-                      <Tag className="values-section-tag" >
-                        {value}
-                      </Tag>
-                        ))}
+                      {item.values.map((value, index) => (
+                        <Tag className="values-section-tag">
+                          <p style={{
+                            fontSize:"1rem",
+                            fontFamily:"Sour Gummy"
+                          }}>{value}</p>
+                        </Tag>
+                      ))}
                     </Card>
                   </Col>
                 ))}

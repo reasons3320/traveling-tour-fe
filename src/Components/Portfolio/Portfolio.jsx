@@ -12,7 +12,7 @@ const Portfolio = () => {
   }, []);
   return (
     <div className="portfolio section container">
-      <div className="secContainer grid">
+      <div className="secContainer">
         <div className="leftContent">
           <div className="secHeading">
             <h3 data-aos="fade-up">Why Should You Choose Us</h3>
@@ -61,9 +61,9 @@ const Portfolio = () => {
             </div>
           </div>
         </div>
-        <div className="rightContent" data-aos="fade-down">
+        {/* <div className="rightContent" data-aos="fade-up">
           <img src={traveling} alt="" />
-        </div>
+        </div> */}
       </div>
     </div>
   );

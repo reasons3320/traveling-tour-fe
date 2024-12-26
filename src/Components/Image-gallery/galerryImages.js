@@ -16,5 +16,9 @@ const galleryImages = [
   galleryImg06,
   galleryImg07,
   galleryImg08,
+  galleryImg06,
+  galleryImg07,
+  galleryImg08,
+  
 ];
 export default galleryImages;

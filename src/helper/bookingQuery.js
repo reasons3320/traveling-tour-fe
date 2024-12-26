@@ -5,10 +5,16 @@ import {
   getBookingsByUserId,
 } from "../api/bookingApi";
 
-export const useBookingTourQuery = () => {
+export const useBookingTourMutation = () => {
   return useMutation({
     mutationFn: (booking) => {
-      createBooking(booking);
+    return  createBooking(booking);
+    },
+    onSuccess:(data)=>{
+      console.log("Booking success !");
+    }
+    ,onError:(error)=>{
+      console.log("Booking failure !")
     },
   });
 };

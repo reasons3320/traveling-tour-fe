@@ -28,10 +28,10 @@ const Questions = () => {
           />
           <Accordion
             title={
-              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, eos?"
+              " How can I book a tour online, and what payment methods are accepted??"
             }
             desc={
-              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, eos? Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, eos?"
+              "You can book a tour online by visiting our website and browsing the available tours. Once you’ve chosen a tour, click on the 'Book Now' button, fill in the required details, and proceed to the payment page"
             }
             active={active}
             setActive={setActive}

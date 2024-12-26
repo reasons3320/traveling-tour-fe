@@ -30,13 +30,14 @@ export const getToursByUserId = async (id) => {
       `${FETCH_URL}tours/search/getToursByUserId/${id}`
     );
     if (!response.ok) {
-      throw new Error("Network response was not ok");
+      const error = response.json();
+      throw new Error(error.message || "Something wrong ! Please try again !");
     }
     // await new Promise((resolve) => setInterval(resolve, 10000));
     const result = await response.json();
     return result?.data || [];
   } catch (error) {
-    console.log(error.message);
+    throw error;
   }
 };
 export const getToursForSearch = async (search, filters) => {

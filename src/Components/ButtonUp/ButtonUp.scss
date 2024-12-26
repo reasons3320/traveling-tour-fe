@@ -1,8 +1,8 @@
+@import '../../App.scss';
 .btn__up {
   position: fixed;
   right: 10px;
   bottom: 50px;
-  background-color: #00000036 !important;
   border: none !important;
   outline: none;
   font-size: 2.5rem !important;
@@ -11,12 +11,23 @@
   justify-content: center;
   align-items: center;
   border-radius: 50px;
-  //   box-shadow: 0 0 10px rgba(0, 0, 0, 0.126);
-  transition: all 0.3s ease-in;
+  animation: fadeOut 1s ease-in-out;
+  &::after{
+    content: '';
+    position: absolute;
+    width: 100%; // Matches the button's size
+    height: 100%;
+    border: 2px solid rgba(0, 0, 0, 0.5); // Optional border for the ping effect
+    border-radius: 50%; // Circular pulse
+    animation: ping 1.5s infinite; // Adjust timing as needed
+    z-index: -1; // Ensures the animation is behind the button
+    transform: scale(1);
+    opacity: 0;
+  }
   .icon {
     width: 100%;
     height: 100%;
-    color: aliceblue;
+    color: #00000033;
   }
 }
 
@@ -26,4 +37,35 @@
   25%   {box-shadow:  0 0 6px #dff669f5;}
   50%   {box-shadow:  0 0 8px #b5c114ef;}
   100% {box-shadow:  0 0 10px #0000003a;}
+}
+@keyframes fadeOut {
+  0%{
+    opacity: 0;
+  }
+  25%{
+    opacity:0.25;
+  }
+  50%{
+    opacity: 0.5;
+  }
+  75%{
+    opacity: 0.75;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+@keyframes ping {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(1.3);
+    opacity: 0;
+  }
 }

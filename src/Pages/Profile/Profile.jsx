@@ -166,13 +166,11 @@ const Profile = () => {
     isError: bookingError,
     refetch: refetchBookings,
   } = useGetBookingsByUserId(user?._id);
-  console.log(bookings);
   const { mutate: deleteTourMutate, isLoading: deleteLoading } =
     useDeleteTourQuery();
   const handleDeleteTour = () => {
     deleteTourMutate(tourDetail?._id, {
       onSuccess: (data) => {
-        console.log(data);
         if (data?.success === false) {
           console.log("Data in onSUccess");
           toast.error("Delete tour failed!");

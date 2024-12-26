@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from "react";
 import "./Destinations.scss";
-import { MdLocationPin } from "react-icons/md";
-import { BsCreditCard, BsCreditCardFill } from "react-icons/bs";
-import { BsCalendarDateFill } from "react-icons/bs";
-import { BiSearchAlt } from "react-icons/bi";
+
 import img1 from "../../assets/halong1.jpg";
 import img2 from "../../assets/halong2.jpg";
 import img3 from "../../assets/halong3.jpg";
 import img4 from "../../assets/halong4.jpg";
+import { MdLocationPin } from "react-icons/md";
+import { BsCreditCard, BsCreditCardFill } from "react-icons/bs";
+import { BsCalendarDateFill } from "react-icons/bs";
+import { BiSearchAlt } from "react-icons/bi";
 
-import { TiLocation } from "react-icons/ti";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useToursQuery } from "../../helper/tourQuery";
+import DestinationCard from "./DestinationCard";
 const destinations = [
   {
     id: 1,
@@ -68,6 +69,7 @@ const Destinations = () => {
     setIsActive(title);
   };
   const { data } = useToursQuery(0, "", []);
+  console.log(data);
   useEffect(() => {
     Aos.init({ duration: 2000 });
   }, []);
@@ -83,13 +85,13 @@ const Destinations = () => {
             Fill in the fields below to find the best spot for your next tour
           </p>
         </div>
-        {/* <div className="searchField grid">
+        <div className="searchField grid">
           <div className="inputField flex" data-aos="fade-up">
             <MdLocationPin className="icon" />
             <input type="text" placeholder="Location" />
           </div>
-        </div> */}
-        {/* <div className="secMenu">
+        </div> 
+        <div className="secMenu">
           <ul className="flex" data-aos="fade-up">
             {menuLists.map((item, index) => (
               <li
@@ -102,9 +104,9 @@ const Destinations = () => {
               </li>
             ))}
           </ul>
-        </div> */}
+        </div>
         <div className="destinationContainer grid">
-          {data?.data?.slice(0, 4).map((item) => (
+          {data?.data?.slice(0, 10).map((item,index) => (
             <div
             onClick={()=>{
                 navigate("/tours")
@@ -113,19 +115,7 @@ const Destinations = () => {
               key={item._id}
               data-aos="fade-up"
             >
-              <div className="imgDiv" data-aos="fade-up">
-                <img src={item.photo} alt="Destination" />
-                <div className="descInfo flex">
-                  <div className="text">
-                    <span className="name">{item.address}</span>
-                    <p className="flex">
-                      <TiLocation className="icon" />
-                      {item.title}
-                    </p>
-                  </div>
-                  <span className="rating">3.5</span>
-                </div>
-              </div>
+           <DestinationCard item={item} key={index}/>
             </div>
           ))}
         </div>

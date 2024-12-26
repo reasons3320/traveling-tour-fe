@@ -8,9 +8,23 @@ import "aos/dist/aos.css";
 import { FaLocationDot } from "react-icons/fa6";
 import { Tag } from "antd";
 import Glimmer from "../Suspense/Glimmer.jsx";
+import { FcStart } from "react-icons/fc";
+import { BiStar } from "react-icons/bi";
+import { averageCounting } from "../../utils/totalRateCounting.js";
 const TourCard = ({ tour }) => {
-  const { _id, title, city, photo, price, featured, reviews, types } = tour;
-  //   const { totalRating, avgRating } = calculateAvgRating(reviews)
+  const {
+    _id,
+    title,
+    location,
+    photo,
+    price,
+    featured,
+    reviews,
+    types,
+    duration_days,
+    maxGroupSize,
+  } = tour;
+  const totalRate = averageCounting(reviews);
   useEffect(() => {
     Aos.init({ duration: 2000 });
   }, []);
@@ -23,38 +37,41 @@ const TourCard = ({ tour }) => {
     >
       <Card>
         <div className="tour__img">
-        {types?.map((type, index) => (
-                <Tag
-                  color={index / 2 === 0 ? "geekblue" : "gold-inverse"}
-                  key={index} 
-                  style={{
-                    fontWeight:500,
-                    zIndex:999,
-                    position:'absolute',
-                    top:5,
-                    borderRadius:5,
-                    border:'none',
-                    boxShadow:"0 0 10px purple"
-                  }}
+          <div className="average-rate">
+            <div className="average-rate-number">{totalRate}</div>
+            <div className="star-icon"> <BiStar /></div>
+            <div className="average-rate-types">
+              {types?.map((type, index) => (
+                <div
+                className="types-tag"
+                  key={index}
                 >
                   {type.name}
-                </Tag>
+                </div>
               ))}
+            </div>
+          </div>
+
           <img src={photo} alt="" />
           {featured && <span>Featured</span>}
         </div>
         <CardBody>
           <div className="card__top">
-          <div className="tour__rating d-flex align-items-center gap-1">
-         
-            </div>
+            {/* <div className="tour__rating d-flex align-items-center gap-1">
+            </div> */}
             <div className="card__position">
-              <span className="">
-                <FaLocationDot />
-              </span>
-             <div className="city">
-                {city}
-             </div>
+              <div>
+                <span className="">
+                  <FaLocationDot />
+                </span>
+                <div className="city">{location}</div>
+              </div>
+              <div className="card__top__duration">
+                Duration : {duration_days} Days
+              </div>
+            </div>
+            <div className="card__top__groupSize">
+              Available:{maxGroupSize} slots
             </div>
           </div>
           <h5 className="tour__title">
@@ -62,7 +79,8 @@ const TourCard = ({ tour }) => {
           </h5>
           <div className="card__bottom d-flex align-items-center justify-content-between mt-3">
             <h5>
-              ${price}<span>/person</span>
+              ${price}
+              <span>/person</span>
             </h5>
             <button className="btn booking__btn">
               <Link to={`/tours/${_id}`}>Book Now</Link>

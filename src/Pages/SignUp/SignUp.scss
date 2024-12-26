@@ -1,3 +1,11 @@
+:root {
+  --primary-color: #ff7e01;
+  --secondary-color: #faa935;
+  --heading-color: #0b2727;
+  --text-color: #6e7074;
+  --font-name: "Montserrat", sans-serif;
+  --subtitle-font-name: "Island Moments", cursive;
+}
 .login__img {
   width: 60%;
   text-align: center;
@@ -61,6 +69,15 @@
   text-decoration: none;
   margin-left: 5px;
   font-weight: 500;
+}
+.form__group{
+  .form__item{
+    margin-bottom: 1rem;
+    .form__item__error{
+      color: red;
+      font-size: 1rem;
+    }
+  }
 }
 @media only screen and (max-width: 768px) {
   .login__img {

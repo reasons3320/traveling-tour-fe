@@ -9,13 +9,14 @@ import "./Review.scss";
 import sunrise from "../../assets/sunrise.jpg";
 import Aos from "aos";
 import "aos/dist/aos.css";
+import { Popover, Tooltip } from "antd";
 const Reviews = () => {
   useEffect(() => {
     Aos.init({ duration: 2000 });
   }, []);
   return (
     <div className="review section container">
-      <div className="secContainer grid" data-aos="fade-up">
+      <div className="secContainer" data-aos="fade-up">
         <div className="textDiv">
           <span className="redText">FROM OUR CLIENTS</span>
           <h3 data-aos="fade-up">
@@ -26,22 +27,17 @@ const Reviews = () => {
             enriching and enjoyable travel experience, filled with unforgettable
             memories that will last a lifetime
           </p>
-          <span className="stars flex" data-aos="fade-up">
-            <AiFillStar className="icon" />
-            <AiFillStar className="icon" />
-            <AiFillStar className="icon" />
-            <AiFillStar className="icon" />
-            <AiFillStar className="icon" />
-          </span>
-          <div className="clientsImages flex">
-            <img src={avt1} alt="Client Image" data-aos="fade-up" />
-            <img src={avt2} alt="Client Image" data-aos="fade-up" />
-            <img src={avt3} alt="Client Image" data-aos="fade-up" />
-            <img src={avt4} alt="Client Image" data-aos="fade-up" />
-          </div>
         </div>
-        <div className="imgDiv" data-aos="fade-down">
-          <img src={sunrise} alt="" data-aos="fade-down" />
+        <div className="review-stars flex" >
+        {Array.from({ length: 5 }, (_, index) => (
+        <AiFillStar key={index} className="icon" data-aos="fade-up" data-aos-delay={900}/>
+      ))}
+        </div>
+        <div className="clientsImages flex">
+          <img src={avt1} alt="Client Image" data-aos="fade-up" data-aos-duration="500"/>
+          <img src={avt2} alt="Client Image" data-aos="fade-up" data-aos-duration="600"/>
+          <img src={avt3} alt="Client Image" data-aos="fade-up" data-aos-duration="700"/>
+          <img src={avt4} alt="Client Image" data-aos="fade-up" data-aos-duration="800"/>
         </div>
       </div>
     </div>
