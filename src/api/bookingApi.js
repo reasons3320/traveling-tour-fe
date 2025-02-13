@@ -1,7 +1,6 @@
 const FETCH_URL = "https://traveling-tour-be.onrender.com/api/v1/";
 
 export const createBooking = async (booking, toast) => {
-  console.log(booking);
   try {
     const res = await fetch(`${FETCH_URL}booking`, {
       // const res = await fetch(`http://localhost:4000/api/v1/booking`, {
@@ -14,7 +13,6 @@ export const createBooking = async (booking, toast) => {
     });
     if(!res.ok) {
       const errorResponse = await res.json();
-      console.log(errorResponse);
       throw new Error(errorResponse.message || "Failed to create booking. Please try again later.");
     }
     const result = await res.json();

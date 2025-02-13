@@ -18,6 +18,7 @@ import { useCreateReviewMessageQuery } from "../../../helper/bookingQuery";
 import toast from "react-hot-toast";
 import { useQueryClient } from "@tanstack/react-query";
 import { Skeleton } from "antd";
+import { Helmet } from "react-helmet";
 const TourDetailsPage = () => {
   const { tourId } = useParams();
   const queryClient = useQueryClient();
@@ -104,6 +105,11 @@ const TourDetailsPage = () => {
   }, [tour]);
   return (
     <div className="TourDetailsSection">
+          <Helmet>
+        <meta charSet="utf-8" />
+        <title>{title}</title>
+        <link rel="canonical" href={`http://localhost:5173/tours/${tourId}`} />
+      </Helmet>
       <Container className="TourDetailContainer">
         {isLoading && (
           <div

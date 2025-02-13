@@ -4,22 +4,30 @@ import img1 from "../../assets/walkonyard.jpg";
 import "./Subscribe.scss";
 import Aos from "aos";
 import "aos/dist/aos.css";
+import { getContentByLanguage } from "../../context/languageUseCase";
+import { subscribeContent } from "./subcribe.lang";
 const Subscribe = () => {
+   const language = getContentByLanguage(subscribeContent);
   useEffect(() => {
     Aos.init({ duration: 2000 });
   }, []);
   return (
     <div className="subscribe section container">
-      <div className="secContainer grid">
-        <img src={img1} alt="" data-aos="fade-up"  style={{borderRadius:"10px"}}/>
+      <div className="secContainer"  data-aos="fade-up">
+        {/* <div className="img-wrapper"> */}
+          <img
+            src={img1}
+            alt=""
+           
+          />
+        {/* </div> */}
         <div className="textDiv">
-          <h4 data-aos="fade-up">Best Way To Start Your Journey!</h4>
+          <h4 data-aos="fade-up">{language.title}</h4>
           <p data-aos="fade-up">
-            We offer personalized itineraries tailored to individual preferences
-            and interests
+            {language.desc}
           </p>
           <button data-aos="fade-up" className="btn">
-            Start Here
+            {language.btn}
           </button>
         </div>
       </div>

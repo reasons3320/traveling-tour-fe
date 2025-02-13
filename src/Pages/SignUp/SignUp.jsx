@@ -28,6 +28,7 @@ const SignUp = () => {
   });
 
   const handleSubmit = (values) => {
+    console.log("handle submit", values);
     registerMutate(values, {
       onSuccess: (data) => {
         if (data.success === false) {
@@ -43,83 +44,95 @@ const SignUp = () => {
   return (
     <section>
       <Container className="w-100">
-        <Row className="">
-          <Col lg="12" className={"m-auto"}>
-            <div className="login__container d-flex justify-content-between">
-              <div className="login__img">
-                <img src={loginImg} alt="" />
-              </div>
-              <div className="login__form">
-                <div className="user">
-                  <img src={userIcon} alt="" />
-                </div>
-                <h2>Register</h2>
-                <Formik
-                  initialValues={{
-                    email: "",
-                    username: "",
-                    phone: "",
-                    password: "",
-                    confirmPassword: "",
-                  }}
-                  validationSchema={validationSchema}
-                  onSubmit={handleSubmit}
-                >
-                  {({ isSubmitting }) => (
-                    <Form className="form__group">
-                      <div className="form__item">
-                        <Field type="text" name="email" placeholder="Email" />
-                        <ErrorMessage name="email" component="div" className="form__item__error"/>
-                      </div>
-                      <div className="form__item">
-                        <Field
-                          type="text"
-                          name="username"
-                          placeholder="Username"
-                        />
-                        <ErrorMessage name="username" component="div" className="form__item__error"/>
-                      </div>
-                      <div className="form__item">
-                        <Field
-                          type="text"
-                          name="phone"
-                          placeholder="Phone number"
-                        />
-                        <ErrorMessage name="phone" component="div" className="form__item__error"/>
-                      </div>
-                      <div className="form__item">
-                        <Field
-                          type="password"
-                          name="password"
-                          placeholder="Password"
-                        />
-                        <ErrorMessage name="password" component="div" className="form__item__error"/>
-                      </div>
-                      <div className="form__item">
-                        <Field
-                          type="password"
-                          name="confirmPassword"
-                          placeholder="Confirm password"
-                        />
-                        <ErrorMessage name="confirmPassword" component="div" className="form__item__error"/>
-                      </div>
-                      <Button
-                        className={"btn secondary__btn auth__btn"}
-                        type="submit"
-                        disabled={isSubmitting || isPending}
-                      >
-                        {isPending ? "Loading..." : "Register"}
-                      </Button>
-                    </Form>
-                  )}
-                </Formik>
-                <p>
-                  Already have an account? <Link to={"/login"}>Log in</Link>
-                </p>
-              </div>
+        <div className="signup__container d-flex justify-content-between">
+          <div className="signup__img">
+            <img src={loginImg} alt="" />
+          </div>
+          <div className="signup__form">
+            <div className="user">
+              <img src={userIcon} alt="" />
             </div>
-          </Col>
-        </Row>
+            <h2>Register</h2>
+            <Formik
+              initialValues={{
+                email: "",
+                username: "",
+                phone: "",
+                password: "",
+                confirmPassword: "",
+              }}
+              validationSchema={validationSchema}
+              onSubmit={handleSubmit}
+            >
+              {({ isSubmitting }) => (
+                <Form className="form__group">
+                  <div className="form__item">
+                    <Field type="text" name="email" placeholder="Email" />
+                    <ErrorMessage
+                      name="email"
+                      component="div"
+                      className="form__item__error"
+                    />
+                  </div>
+                  <div className="form__item">
+                    <Field type="text" name="username" placeholder="Username" />
+                    <ErrorMessage
+                      name="username"
+                      component="div"
+                      className="form__item__error"
+                    />
+                  </div>
+                  <div className="form__item">
+                    <Field
+                      type="text"
+                      name="phone"
+                      placeholder="Phone number"
+                    />
+                    <ErrorMessage
+                      name="phone"
+                      component="div"
+                      className="form__item__error"
+                    />
+                  </div>
+                  <div className="form__item">
+                    <Field
+                      type="password"
+                      name="password"
+                      placeholder="Password"
+                    />
+                    <ErrorMessage
+                      name="password"
+                      component="div"
+                      className="form__item__error"
+                    />
+                  </div>
+                  <div className="form__item">
+                    <Field
+                      type="password"
+                      name="confirmPassword"
+                      placeholder="Confirm password"
+                    />
+                    <ErrorMessage
+                      name="confirmPassword"
+                      component="div"
+                      className="form__item__error"
+                    />
+                  </div>
+                  <Button
+                    className={"btn secondary__btn auth__btn"}
+                    type="submit"
+                    disabled={isPending ? true : false}
+                  >
+                    {isPending ? "Loading..." : "Register"}
+                  </Button>
+                </Form>
+              )}
+            </Formik>
+            <p>
+              Already have an account? <Link to={"/login"}>Log in</Link>
+            </p>
+          </div>
+        </div>
       </Container>
     </section>
   );

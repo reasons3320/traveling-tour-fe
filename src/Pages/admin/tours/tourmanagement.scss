@@ -1,0 +1,218 @@
+.tourOrgContainer {
+  box-sizing: border-box;
+  height: 100%;
+  min-height: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 10px 5px;
+  gap: 10px;
+  .add-section{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+  }
+  .mainSide {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: start;
+    height: 100% !important;
+    top: 0;
+  }
+
+  .leftBar {
+    width: 20%;
+    height: 60%;
+    //   margin-top: 100px;
+    margin-bottom: 20px;
+    .searchBar {
+      // top: 160px;
+      // position: fixed;
+      box-sizing: border-box;
+      padding: 1rem;
+      border-radius: 20px;
+      height: 50%;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.23);
+      overflow: scroll;
+      .searchBarItems {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        margin: 10px 0;
+        Input {
+          box-shadow: 0 0 3px green($color: #000000);
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+    }
+  }
+  .rightSide {
+    position: relative;
+    width: 78%;
+    // height: 100%;
+    border-radius: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.23);
+    gap: 20px;
+    overflow: hidden;
+    background-color: white;
+    .data-container {
+      .data-row {
+        margin-bottom: 50px !important;
+      }
+    }
+    .paging-section {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      max-width: 700px;
+      position: absolute;
+      bottom: 10px;
+    }
+    .empty-tag {
+      height: 100%;
+      min-height: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      left: 50%;
+      translate: -50% 0;
+    }
+    .imgContainer {
+      width: 60%;
+      height: 60%;
+      margin: auto;
+    }
+  }
+}
+.pagination span {
+  width: 2rem;
+  height: 2rem;
+  padding: 5px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--secondary-color);
+  color: var(--heading-color);
+  font-size: 1.1rem;
+  cursor: pointer;
+  font-weight: 700;
+}
+.active__page {
+  background: var(--secondary-color);
+  color: #fff !important;
+}
+@media screen and (min-width: 767px) {
+  .tourContainer {
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+    .mainSide {
+      margin-top: 100px;
+
+      .leftBar {
+        margin-top: 0px;
+        width: 100%;
+        height: 60%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+        .searchBar {
+          width: 100%;
+          padding: 1rem;
+          border-radius: 20px;
+          height: 40%;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.23);
+          .form-check {
+            display: flex;
+          }
+          .searchBarItems {
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            margin: 10px 0;
+            Input {
+              box-shadow: 0 0 3px green($color: #000000);
+              &:focus {
+                outline: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (min-width: 976px) {
+  .tourContainer {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    // min-height: 1000px;
+    justify-content: flex-start;
+    .createTourBar {
+      width: 100%;
+      height: 150px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: end;
+      margin-bottom: 1rem;
+      // background-color: black;
+    }
+    .mainSide {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      justify-content: space-between;
+      padding: 10px;
+      box-sizing: border-box;
+      .leftBar {
+        display: flex;
+        justify-content: flex-start;
+        width: 20%;
+        .searchBar {
+          // position: fixed;
+          width: 100%;
+          // width: 250px;
+          .searchBarsCheckBoxes {
+            display: flex;
+            flex-direction: column;
+          }
+        }
+      }
+      .rightSide {
+        width: 78%;
+        height: 100%;
+        min-height: 800px;
+        border-radius: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.23);
+        .data-container {
+          padding: 2px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          // background-color: bisque;
+          height: 100%;
+          width: 100%;
+          margin-bottom: 60px;
+        }
+      }
+    }
+  }
+}
+// custom value
+.custom-w-45 {
+  width: 45%;
+}

@@ -1,11 +1,11 @@
 import { convertToStandardQueryParams } from "../utils/convertArrayParams";
 const FETCH_URL = "https://traveling-tour-be.onrender.com/api/v1/";
 export const getTours = async (params) => {
-    const newParams = convertToStandardQueryParams(params)
+  const newParams = convertToStandardQueryParams(params);
   try {
     // const response = await fetch(`${FETCH_URL}/api/v1/tours?page=${page}`);
     // https://traveling-tour-be.onrender.com/api/v1/tours?page=0
-    const response = await fetch(`${FETCH_URL}tours?${newParams}`,{
+    const response = await fetch(`${FETCH_URL}tours?${newParams}`, {
       method: "get",
       credentials: "include",
       headers: {
@@ -75,7 +75,7 @@ export const getSingleTour = async (tourId) => {
   try {
     const response = await fetch(`${FETCH_URL}tours/${tourId}`);
     const result = await response.json();
-    return result?.data;
+    return result?.data || [];
   } catch (error) {
     console.log(error.message);
   }
@@ -90,48 +90,30 @@ export const createNewTour = async (tour) => {
       },
       credentials: "include",
       body: JSON.stringify({
-        userId: tour.userId,
+        organizer_id: tour.userId,
         title: tour.title,
         city: tour.city,
-        address: tour.address,
+        location_id: tour.location_id,
+        duration_days: tour.duration_days,
         price: tour.price,
         types: tour.types,
-        maxGroupSize: tour.maxGroupSize || 5,
-        desc: tour.desc,
+        maxGroupSize: tour.maxGroupSize || 0,
+        desc: tour.description,
         reviews: [],
         photo: tour.photo ? tour.photo : "empty string",
         featured: true,
       }),
     });
-    if (!response.ok) {
-      const error = response.json();
-      return error;
-    }
     const result = await response.json();
     return result;
   } catch (error) {
-    console.log(error.message);
+    throw error;
   }
-  // .then((res) => {
-  //   console.log(res);
-  //   return res.json();
-  // })
-  // .then((res) => {
-  //   console.log(res);
-  // })
-  // .catch((error) => {
-  //   console.log(error);
-  // });
 };
-export const updateTour = async (tour, tourId, toast) => {
+export const updateTour = async (tour) => {
   try {
     console.log("tour nhan dc khi upadte la", tour);
-
-    // const response = await fetch(`${FETCH_URL}tours/${tourId}`, {
-    // const response = await fetch(
-    // `http://localhost:4000/api/v1/tours/${tourId}`,
-    // {
-    const response = await fetch(`${FETCH_URL}tours/${tourId}`, {
+    const response = await fetch(`${FETCH_URL}tours`, {
       method: "put",
       headers: {
         "content-type": "application/json",
@@ -139,16 +121,9 @@ export const updateTour = async (tour, tourId, toast) => {
       credentials: "include",
       body: JSON.stringify(tour),
     })
-      .then((res) => {
-        return res.json();
-      })
-      .then((res) => {
-        if (!res.success) {
-          toast.error("Failure to update this tour");
-        } else {
-          toast.success("Update tour successfully");
-        }
-      });
+    const result = await response.json();
+    return result;
+   
   } catch (error) {
     console.log(error.message);
   }

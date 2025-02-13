@@ -20,50 +20,90 @@ import { useSelector } from "react-redux";
 import { CgAdd } from "react-icons/cg";
 import { Link, useNavigate } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
-import { FiDelete } from "react-icons/fi";
-import { FaDeleteLeft } from "react-icons/fa6";
 import { MdDeleteOutline } from "react-icons/md";
-import {
-  useDeleteTourQuery,
-  useGetToursByUserIdQuery,
-} from "../../helper/tourQuery";
+import { useDeleteTourQuery } from "../../helper/tourQuery";
 import { useGetBookingsByUserId } from "../../helper/bookingQuery";
 import { changeFormatDate } from "../../utils/changeFormatDate";
-import { deleteTour } from "../../api/tourApi";
 import toast from "react-hot-toast";
 import { useQueryClient } from "@tanstack/react-query";
+import moment from "moment";
+import { useStyleRegister } from "antd/es/theme/internal";
 
 const historyColumns = [
   {
     title: "Tour Name",
     dataIndex: "tourName",
     key: "tourName",
+    render: (value, record, index) => (
+      <div>{record?.tour_schedule_id?.tourId?.title}</div>
+    ),
   },
   {
     title: "Booked At",
-    dataIndex: "bookAt",
-    key: "bookAt",
-    render: (text) => <div>{changeFormatDate(text)}</div>,
+    dataIndex: "createdAt",
+    key: "createdAt",
+    render: (value, record, index) => <div>{changeFormatDate(value)}</div>,
+    sorter: (a, b) => moment(a.createdAt).unix() - moment(b.createdAt).unix(),
   },
+  {
+    title: "Ready date",
+    dataIndex: "tour_schedule_id",
+    key: "tour_schedule_id",
+    render: (value, record, index) => <div>{changeFormatDate(value?.available_date)}</div>,
+    sorter: (a, b) => moment(a.tour_schedule_id?.available_date).unix() - moment(b.tour_schedule_id?.available_date).unix(),
+  },
+  
   {
     title: "Email",
     dataIndex: "userEmail",
     key: "userEmail",
+    render: (value, record, index) => <div>{record.customerId?.email}</div>,
   },
   {
     title: "Full Name",
-    dataIndex: "fullName",
-    key: "fullName",
+    dataIndex: "username",
+    key: "username",
+    render: (value) => <div>{value}</div>,
+    onCell: (record) => ({
+      style: { backgroundColor: "white" }, // Light blue background
+    }),
   },
   {
     title: "Phone",
     dataIndex: "phone",
     key: "phone",
+    render: (value) => <div>{value}</div>,
+    onCell: (record) => ({
+      style: { backgroundColor: "white" }, // Light blue background
+    }),
   },
   {
     title: "Booked Slots",
     dataIndex: "guestSize",
     key: "guestSize",
+    onCell: (record) => ({
+      style: { backgroundColor: "white" }, // Light blue background
+    }),
+  },
+  {
+    title: "Total($)",
+    dataIndex: "totalPrice",
+    key: "totalPrice",
+    sorter: (a, b) => {
+      return a.totalPrice - b.totalPrice;
+    },
+    onCell: (record) => ({
+      style: { backgroundColor: "white" }, // Light blue background
+    }),
+  },
+  {
+    title: "Status",
+    dataIndex: "status",
+    key: "status",
+    render: (value, record, index) => <Tag color="geekblue">{value}</Tag>,
+    onCell: (record) => ({
+      style: { backgroundColor: "white" }, // Light blue background
+    }),
   },
 ];
 const Profile = () => {
@@ -71,6 +111,9 @@ const Profile = () => {
   const queryClient = useQueryClient();
   const [modal, setModal] = useState(false);
   const [tourDetail, setTourDetail] = useState({});
+  const [userForm, setUserForm] = useState({
+    gender: "Male" || "Female",
+  });
   const toggle = () => setModal(!modal);
   const user = useSelector((state) => state.user.user) || {};
   const columns = [
@@ -154,12 +197,18 @@ const Profile = () => {
     },
   ];
   // console.log(user);
+  // const {
+  //   data: tours,
+  //   isLoading,
+  //   isError,
+  //   refetch: refetchTours,
+  // } = useGetToursByUserIdQuery(user?._id);
   const {
-    data: tours,
+    data,
     isLoading,
     isError,
     refetch: refetchTours,
-  } = useGetToursByUserIdQuery(user?._id);
+  } = useGetBookingsByUserId(user?._id);
   const {
     data: bookings,
     isLoading: bookingLoading,
@@ -172,11 +221,9 @@ const Profile = () => {
     deleteTourMutate(tourDetail?._id, {
       onSuccess: (data) => {
         if (data?.success === false) {
-          console.log("Data in onSUccess");
           toast.error("Delete tour failed!");
           setModal(!modal);
         } else {
-          console.log("Vao thanh cong xoa");
           refetchTours();
           toast.success(data?.message);
           setModal(!modal);
@@ -242,7 +289,12 @@ const Profile = () => {
                 <Col lg="6">
                   <FormGroup>
                     <Label>Phone</Label>
-                    <Input id="phone" name="phone" placeholder="+84384719028" />
+                    <Input
+                      id="phone"
+                      name="phone"
+                      placeholder="+8412 345 678"
+                      value={user?.phone}
+                    />
                   </FormGroup>
                 </Col>
                 <Col lg="6">
@@ -272,12 +324,20 @@ const Profile = () => {
                   className="d-flex align-items-center justify-content-start"
                 >
                   <FormGroup check inline>
-                    <Label check>Male</Label>
+                    <Label check htmlFor="male">Male</Label>
                     <Input
                       id="male"
                       name="male"
                       type="radio"
-                      checked={user?.gender === "Male"}
+                      value={"Male"}
+                      // checked={user?.gender === "Male"}
+                      checked={userForm.gender === "Male"}
+                      onChange={(e) =>
+                        setUserForm((prev) => ({
+                          ...prev,
+                          gender: e.target.value,
+                        }))
+                      }
                     />
                   </FormGroup>
                 </Col>
@@ -286,12 +346,20 @@ const Profile = () => {
                   className="d-flex align-items-center justify-content-start"
                 >
                   <FormGroup check>
-                    <Label check>Female</Label>
+                    <Label check htmlFor="female">Female</Label>
                     <Input
                       id="female"
                       name="female"
                       type="radio"
-                      checked={user?.gender === "Female"}
+                      // checked={user?.gender === "Female"}
+                      value="Female"
+                      checked={userForm.gender === "Female"}
+                      onChange={(e) => {
+                        setUserForm((prev) => ({
+                          ...prev,
+                          gender: e.target.value,
+                        }));
+                      }}
                     />
                   </FormGroup>
                 </Col>
@@ -317,8 +385,8 @@ const Profile = () => {
               </div>
             </div>
             <Table
-              dataSource={tours}
-              key={tours?.map((item, index) => ({
+              dataSource={data}
+              key={data?.map((item, index) => ({
                 key: index,
               }))}
               columns={columns}
@@ -330,14 +398,16 @@ const Profile = () => {
               <h5>History</h5>
             </div>
             <Table
-              dataSource={bookings?.map((item, index) => ({
+              loading={isLoading}
+              dataSource={data?.map((item, index) => ({
                 ...item,
                 key: index,
               }))}
-              key={bookings?.map((item, index) => ({
+              key={data?.map((item, index) => ({
                 key: index,
               }))}
               columns={historyColumns}
+              scroll={{ x: 800 }}
             ></Table>
           </div>
         )}

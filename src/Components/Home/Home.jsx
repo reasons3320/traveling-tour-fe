@@ -8,7 +8,10 @@ import img3 from "../../assets/halong3.jpg";
 import img4 from "../../assets/halong4.jpg";
 import Aos from "aos";
 import "aos/dist/aos.css";
+import { getContentByLanguage } from "../../context/languageUseCase";
+import { homeContent } from "./home.lang";
 const Home = () => {
+   const language = getContentByLanguage(homeContent);
   useEffect(() => {
     Aos.init({ duration: 2000 });
   }, []);
@@ -18,19 +21,24 @@ const Home = () => {
         <video src={bgVideo} autoPlay muted loop></video>
       </div>
       <div className="sectionText">
-        <h1 data-aos="fade-up">Unlock Your Travel Dreams With Us !</h1>
+        <h1 data-aos="fade-up">{language?.unlock}</h1>
         <p data-aos="fade-up">
-          Discover the world's most adventurous nature,life is so short for a
-          trip.
+          {
+            language?.discovery
+          }
         </p>
         <button className="btn flex" data-aos="fade-up">
-          GET STARTED
+        {
+            language?.btnTitle
+          }
           <AiOutlineSwapRight className="icon" />
         </button>
       </div>
       <div className="popularPlaces">
         <div className="content">
-          <h3 data-aos="fade-up">Popular Places</h3>
+          <h3 data-aos="fade-up">    {
+            language?.popular
+          }</h3>
           <div className="images flex" data-aos="fade-up">
             <img src={img1} alt="Destination" />
             <img src={img2} alt="Destination" />

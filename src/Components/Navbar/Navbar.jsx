@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./Navbar.scss";
 import { BiLogoMediumOld } from "react-icons/bi";
 import { AiFillCloseCircle } from "react-icons/ai";
@@ -6,28 +6,36 @@ import { PiDotsNineBold } from "react-icons/pi";
 import { Link, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import DropdownComponent from "../Dropdown/Dropdown";
+import { languageContext } from "../../context/LanguageContext";
+import { getContentByLanguage } from "../../context/languageUseCase";
+import { navContent } from "./nav.lang";
+import { FaEarthAsia } from "react-icons/fa6";
+import { Switch } from "antd";
 
-const navBarLists = [
-  {
-    path: "/",
-    title: "Home",
-  },
-  {
-    path: "/tours",
-    title: "Tour",
-  },
-  {
-    path: "/aboutUs",
-    title: "About Us",
-  },
-
-  {
-    path: "/blogs",
-    title: "Blogs",
-  },
-];
 const Navbar = () => {
   const check = localStorage.getItem("user");
+  const { handleChangeLanguage } = useContext(languageContext);
+  const language = getContentByLanguage(navContent);
+  const navBarLists = [
+    {
+      path: "/",
+      title: language?.home,
+    },
+    {
+      path: "/tours",
+      title: language?.tour,
+    },
+    {
+      path: "/aboutUs",
+      title:language?.about,
+    },
+
+    {
+      path: "/blogs",
+      title:language?.blogs,
+    },
+  ];
+  console.log(language);
   const user = useSelector((state) => state.user.user) || {};
   const [navBar, setNavbar] = useState("menu");
   const showNavbar = () => {
@@ -53,7 +61,7 @@ const Navbar = () => {
       <div className={navBar}>
         <ul>
           {navBarLists.map((item, index) => (
-            <li>
+            <li key={index}>
               <NavLink
                 to={item.path}
                 onClick={() => setNavbar("menu")}
@@ -69,31 +77,49 @@ const Navbar = () => {
         </ul>
         <AiFillCloseCircle className="icon closeIcon" onClick={removeNavbar} />
       </div>
+      <div style={{
+        display:'flex',
+        gap:"10px",
+        alignItems:'center'
+      }}>
+        <Switch checkedChildren="EN" unCheckedChildren="VI" defaultChecked onChange={handleChangeLanguage}/>
+        <FaEarthAsia
+          onClick={() => {
+            setLanguage("VI");
+          }}
+        />
+      </div>
       <div className="auth-section">
         {check ? (
           <DropdownComponent />
         ) : (
           <div className="btns">
-            <button className="signIn btn">
-              <Link
-                to={"/login"}
-                style={{
-                  color: "white",
-                }}
-              >
-                Sign In
-              </Link>
-            </button>
-            <button className="signIn btn">
-              <Link
-                to={"/register"}
-                style={{
-                  color: "white",
-                }}
-              >
-                Sign Up
-              </Link>
-            </button>
+            <Link
+              to={"/login"}
+              style={{
+                color: "black",
+                textAlign: "center",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                textDecoration: "underline",
+              }}
+            >
+              Sign In
+            </Link>
+            <Link
+              to={"/register"}
+              style={{
+                color: "black",
+                textAlign: "center",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                textDecoration: "underline",
+              }}
+            >
+              Sign Up
+            </Link>
           </div>
         )}
       </div>

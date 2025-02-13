@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../TourDetailsPage.scss";
 import { Input } from "reactstrap";
-import { Radio } from "antd";
-import './CustomFilter.scss'
-import { getTourTypesQuery } from "../../../../helper/tourTypeQuery";
+import { Radio, Select } from "antd";
+import "./CustomFilter.scss";
+import {
+  getLocationsQuery,
+  getTourTypesQuery,
+} from "../../../../helper/tourTypeQuery";
 const filterLists = {
   filterCheckedLists: [
     {
@@ -30,11 +33,39 @@ const filterLists = {
 };
 const items = filterLists.filterCheckedLists;
 const CustomFilter = (props) => {
-  const { handleSearch, searchParams, setSearchParams, onHandleCheck } = props;
-  const {data,isError,isLoading} = getTourTypesQuery();
+  const {
+    handleSearch,
+    searchParams,
+    setSearchParams,
+    onHandleCheck,
+    onHandleChooseLocation,
+    resetFilter,
+  } = props;
+  const { data, isError, isLoading } = getTourTypesQuery();
+  const { data: locations } = getLocationsQuery();
+  useEffect(()=>{
+    console.log("Change or not",searchParams);
+  },[searchParams])
   return (
     <div className="searchBar">
-      <h6>Filters</h6>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <h6>Filters</h6>
+        <h6
+          onClick={resetFilter}
+          style={{
+            textDecoration: "underline",
+            cursor: "pointer",
+          }}
+        >
+          Clear all
+        </h6>
+      </div>
       <div class="searchBarItems">
         <Input
           type="text"
@@ -57,6 +88,7 @@ const CustomFilter = (props) => {
                 }}
                 type="checkbox"
                 value={item._id}
+                checked={searchParams.travelTypes.includes(item._id)} 
                 id={item._id}
                 onChange={onHandleCheck}
               />
@@ -67,18 +99,37 @@ const CustomFilter = (props) => {
           ))}
         </div>
         <div>
-          <h6>Cost</h6>
-          <Radio.Group style={{
-            marginBottom:20,
-            display:'flex',
-            flexDirection:'column'
-          }} onChange={(e)=>setSearchParams({...searchParams,cost:e.target.value})} value={searchParams.cost}>
-            <Radio value={'asc'}>
-              Ascending</Radio>
-            <Radio value={'desc'}>Descending</Radio>
-          </Radio.Group>
+          <h6>Locations</h6>
+          <Select
+            style={{
+              width: "100%",
+            }}
+            options={locations?.map((item) => ({
+              value: item._id,
+              label: item.city_name,
+            }))}
+            value={searchParams.location}
+            onChange={onHandleChooseLocation}
+          />
         </div>
         <div>
+          <h6>Cost</h6>
+          <Radio.Group
+            style={{
+              marginBottom: 20,
+              display: "flex",
+              flexDirection: "column",
+            }}
+            onChange={(e) =>
+              setSearchParams({ ...searchParams, cost: e.target.value })
+            }
+            value={searchParams.cost || ""}
+          >
+            <Radio value={"asc"}>Ascending</Radio>
+            <Radio value={"desc"}>Descending</Radio>
+          </Radio.Group>
+        </div>
+        {/* <div>
           <h6>Date</h6>
           <div class=" form-check" key={"newest"}>
             <Input
@@ -110,7 +161,7 @@ const CustomFilter = (props) => {
               Latest
             </label>
           </div>
-        </div>
+        </div> */}
       </div>
       {/* =======Popular city========= */}
     </div>

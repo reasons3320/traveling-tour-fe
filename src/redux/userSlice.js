@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-const user = localStorage.getItem("user");
+const storedUser = localStorage.getItem("user");
+let user = storedUser ? JSON.parse(storedUser) : null;
 const initialState = {
-  user: user !== "undefined" ? JSON.parse(user) : null,
+  user,
   loading: false,
   error: null,
 };
@@ -11,13 +12,16 @@ const userSlice = createSlice({
   reducers: {
     handleLoginSuccess: (state, action) => {
       const user = action.payload;
-      // console.log("trong state", user);
       if (user) {
         localStorage.setItem("user", JSON.stringify(user));
         state.user = user;
       }
     },
+    logout: (state, action) => {
+      state.user = {};
+      localStorage.removeItem("user");
+    },
   },
 });
-export const { handleLoginSuccess } = userSlice.actions;
+export const { handleLoginSuccess, logout } = userSlice.actions;
 export default userSlice.reducer;

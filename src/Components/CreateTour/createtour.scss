@@ -1,0 +1,40 @@
+.create-container{
+    padding: 10px;
+    height: 100%;
+    overflow: auto;
+    .create-mainSide{
+        height: 100%;
+        background-color: white;
+        padding: 20px;
+        border-radius: 20px;
+        border: 1px solid #80808060;
+        .form-wrapper{
+            display: flex;
+            justify-content: space-around;
+        .tour-leftSide{
+            width: 40%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            .form-item{
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+        .tour-rightSide{
+            width: 45%;
+            max-height: 500px;
+            border-radius: 20px;
+            border: 1px solid pink;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all .2s ease-in-out;
+            &:hover{
+                border: 5px solid rgba(0, 0, 0, 0.408);
+            }
+            
+        }
+    }
+    }
+}

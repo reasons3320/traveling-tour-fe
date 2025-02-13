@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { SlLike } from "react-icons/sl";
-import { Button } from "reactstrap";
 import { blogs } from "../../data/blogs";
 import { useParams } from "react-router-dom";
 import "./BlogDetail.scss";
 import { RxAvatar } from "react-icons/rx";
+import { FaEarthAfrica } from "react-icons/fa6";
+import moment from "moment";
 const BlogDetail = () => {
   const blogId = useParams().blogId || "";
-  console.log(blogId);
   const [data, setData] = useState();
   useEffect(() => {
     blogs.map((blog) => {
       if (blog.id === parseInt(blogId)) {
-        console.log(blog);
         setData(blog);
       }
     });
@@ -49,9 +48,17 @@ const BlogDetail = () => {
                 <p
                   style={{
                     color: "gray",
+                    display:'flex',
+                    gap:5,
+                    alignItems:'center'
                   }}
                 >
-                  25-5-2024
+                  <span>
+                  <FaEarthAfrica /> 
+                  </span>
+                  {
+                    moment(data?.createDate, "DDMMYYYY").fromNow()
+                  }
                 </p>
               </div>
             </div>

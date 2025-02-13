@@ -6,11 +6,12 @@ import avt3 from "../../assets/avt3.jpg";
 import avt4 from "../../assets/avt4.jpg";
 
 import "./Review.scss";
-import sunrise from "../../assets/sunrise.jpg";
 import Aos from "aos";
 import "aos/dist/aos.css";
-import { Popover, Tooltip } from "antd";
+import { getContentByLanguage } from "../../context/languageUseCase";
+import { reviewContent } from "./review.lang";
 const Reviews = () => {
+   const language = getContentByLanguage(reviewContent);
   useEffect(() => {
     Aos.init({ duration: 2000 });
   }, []);
@@ -18,14 +19,12 @@ const Reviews = () => {
     <div className="review section container">
       <div className="secContainer" data-aos="fade-up">
         <div className="textDiv">
-          <span className="redText">FROM OUR CLIENTS</span>
+          <span className="redText">{language.fromOurClients}</span>
           <h3 data-aos="fade-up">
-            Real Travel History From Our Beloved Clients
+            {language.secondTitle}
           </h3>
           <p data-aos="fade-up">
-            By choosing us as their tour agency,customers can expect an
-            enriching and enjoyable travel experience, filled with unforgettable
-            memories that will last a lifetime
+            {language.desc}
           </p>
         </div>
         <div className="review-stars flex" >

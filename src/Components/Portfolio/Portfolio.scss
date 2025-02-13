@@ -1,4 +1,7 @@
 .portfolio {
+  // background: url(../../assets/beach1.jpg);
+  border-radius: 10px;
+  box-sizing: border-box;
   .secContainer {
     gap: 2rem;
     .rightContent {
@@ -15,17 +18,57 @@
     .leftContent {
       .grid {
         .singlePortfolio {
+          backdrop-filter: blur(10px);
+          border-radius: 10px;
+          box-sizing: border-box;
+          padding: 10px;
           gap: 1rem;
           align-items: flex-start;
+          margin: auto;
+          display: flex;
+          flex-direction: column;
+          position: relative;
+          .number {
+            font-size: 2.25rem;
+            width: 70px;
+            height: 70px;
+            color: white;
+            margin: 0;
+            display: block;
+            position: absolute;
+            right: 20px;
+            top: 0;
+            background-color: orange;
+            border-radius: 100%;
+            padding: 10px;
+            text-align: center;
+            z-index: 99;
+          }
           .iconDiv {
+            width: 200px;
+            height: 200px;
+            border-radius: 100%;
+            border: 1px solid pink;
+            position: relative;
             .desIcon {
-              height: 50px;
-              width: 50px;
+              position: absolute;
+              height: 100px;
+              width: 100px;
+              color: orange;
+              left: 50%;
+              top: 50%;
+              transform: translate(-50%, -50%);
+            }
+            h4 {
+              padding-bottom: 0.5rem;
+              text-align: center;
             }
           }
           .info {
-            h4 {
-              padding-bottom: 0.5rem;
+            text-align: center;
+            p {
+              // color: var(--formColor);
+              color: gray;
             }
           }
         }
@@ -34,48 +77,6 @@
   }
 }
 // media queries
-@media screen and (max-width: 480px) {
-  .portfolio {
-    .secContainer {
-      grid-template-columns: repeat(1, 1fr);
-      .leftContent {
-        .secHeading {
-          h3 {
-            font-size: var(--h2FontSize);
-            text-align: center;
-            color: var(--primaryColor);
-          }
-          p {
-            font-size: var(--normalFontSize);
-            padding: 0.5rem 0;
-            text-align: center;
-          }
-        }
-        .grid {
-          .singlePortfolio {
-            gap: 1.5rem;
-            .iconDiv {
-              img {
-                height: 60px;
-                width: 60px;
-              }
-            }
-            .info {
-              h4 {
-                padding-bottom: 0.5rem;
-                font-size: var(--h3FontSize);
-              }
-              p {
-                font-size: var(--normalFontSize);
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
 @media screen and (min-width: 765px) {
   .portfolio {
     .secContainer {
@@ -91,7 +92,8 @@
         .grid {
           grid-template-columns: repeat(2, 1fr);
           .singlePortfolio {
-            gap: 1.5rem;
+            gap: 0rem;
+            height: 280px;
           }
         }
       }
@@ -112,7 +114,7 @@
 @media screen and (min-width: 820px) {
   .portfolio {
     .secContainer {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, 3fr);
       .leftContent {
         .secHeading {
           h3 {
@@ -126,12 +128,27 @@
           }
         }
         .grid {
-          grid-template-columns: repeat(1, 1fr);
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 50px;
           .singlePortfolio {
-            gap: 1.5rem;
-            .info{
-              p{
-                font-size: var(--h3FontSize);
+            gap: 0rem;
+            width: 100%;
+            height: 280px;
+            overflow: hidden;
+            .number {
+              font-size: 3.5rem;
+              overflow: hidden;
+            }
+            .info {
+              p {
+                font-size: 0.8rem;
+              }
+            }
+            .iconDiv {
+              .desIcon {
+                width: 60px;
+                height: 60px;
               }
             }
           }
@@ -163,7 +180,10 @@
           gap: 2.5rem;
           margin-top: 3rem;
           .singlePortfolio {
-            gap: 2rem;
+            gap: 0.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
           }
         }
       }

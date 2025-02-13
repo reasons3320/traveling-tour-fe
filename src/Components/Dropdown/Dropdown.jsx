@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import "./Dropdown.scss";
 import { RxAvatar } from "react-icons/rx";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Dropdown, Space } from "antd";
 import { Link } from "react-router-dom";
 import { signOut } from "../../api/authApi";
+import { logout } from "../../redux/userSlice";
+
+const DropdownComponent = () => {
+  const dispatch = useDispatch();
 const items = [
   {
     key: "1",
@@ -29,8 +33,7 @@ const items = [
           textDecoration: "none",
         }}
         onClick={() => {
-          localStorage.removeItem("user");
-          signOut();
+          dispatch(logout());
         }}
       >
         Log out
@@ -38,7 +41,6 @@ const items = [
     ),
   },
 ];
-const DropdownComponent = () => {
   const user = useSelector((state) => state.user.user) || {};
   const toggle = () => setDropdownOpen((prevState) => !prevState);
   return (

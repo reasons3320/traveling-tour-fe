@@ -4,7 +4,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: "Sour Gummy", serif;
+  // font-family: "Sour Gummy", serif;
 }
 :root {
   --primaryColor: hsl(14, 90%, 53%);
@@ -28,9 +28,6 @@ body {
 }
 * {
   box-sizing: border-box;
-}
-body {
-  background: var(--bgColor);
 }
 .flex {
   display: flex;
@@ -135,10 +132,10 @@ video {
     margin: auto;
   }
 }
-button {
-  transition: all 0.3s ease-in;
-  animation: aboutShadow 2s infinite 0s;
-}
+// button {
+//   transition: all 0.3s ease-in;
+//   animation: aboutShadow 2s infinite 0s;
+// }
 
 @keyframes shadow {
   0% {

@@ -8,10 +8,11 @@
 }
 
 .tour__card {
-  width: 100%;
+  width: 95%;
+  height: 100%;
   margin-bottom: 10px;
   cursor: pointer;
-  min-width: 250px;
+  min-width: 230px;
 }
 
 .tour__img {
@@ -50,6 +51,7 @@
         color: white;
         padding: 5px;
         border-radius: 10px;
+        margin: 0 5px;
       }
     }
   }
@@ -90,6 +92,7 @@
   display: inline;
   max-width: 100%;
   overflow: auto;
+  width: 100%;
 }
 .card__position {
   .card__top__duration {
@@ -152,16 +155,22 @@
 .tour__title a:hover {
   color: var(--secondary-color);
 }
-
 .card__bottom h5 {
+  margin: 0 !important;
+  padding: 0 !important ;
   color: var(--secondary-color);
-  font-size: 0.8rem;
+  font-size:.8rem !important;
   max-width: 70%;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  gap: 5px;
 }
 
 .card__bottom h5 span {
   font-weight: 500;
   color: var(--text-color);
+  font-size: .8rem !important;
 }
 
 .booking__btn {

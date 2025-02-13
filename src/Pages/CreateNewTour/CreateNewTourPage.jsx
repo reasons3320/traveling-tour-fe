@@ -50,7 +50,6 @@ const CreateNewTourPage = () => {
     setFormData({ ...formData, [name]: value });
   };
   const onInputChangeSelect = (event) => {
-    console.log("Set input select");
     const options = event.target.options;
     const selectedValues = [];
     for (const option of options) {

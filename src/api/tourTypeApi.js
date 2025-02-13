@@ -9,3 +9,12 @@ export const getTourTypes = async () => {
     console.log("Error at get tour types", error.message);
   }
 };
+export const getLocations = async () => {
+  try {
+    const res = await fetch(`${FETCH_URL}city`);
+    const result = await res.json();
+    return result.data || [];
+  } catch (error) {
+    console.log("Error at get tour types", error.message);
+  }
+};

@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "reactstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate, useNavigation } from "react-router-dom";
 import "./SignIn.scss";
 import loginImg from "../../assets/login.png";
 import userIcon from "../../assets/user.png";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { handleLoginSuccess } from "../../redux/userSlice";
 import { useLoginMutation } from "../../helper/authQuery";
 import toast from "react-hot-toast";
@@ -12,28 +12,26 @@ import { ErrorMessage, Form, Formik } from "formik";
 import * as yup from "yup";
 const SignIn = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
   });
-  const navigate = useNavigate();
-
-  const handleChange = (e) => {
-    setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
-  };
   const { mutate: loginMutation, isPending } = useLoginMutation();
   const handleClick = async (credentials) => {
-    // console.log("Form submitted");
     loginMutation(credentials, {
       onSuccess: (data) => {
         if (data.success === false) {
           toast.error("Login failure!");
-          // dispatch(handleLoginSuccess(data));
-          // navigate("/");
         } else {
           toast.success("Login succeed!");
           dispatch(handleLoginSuccess(data?.data));
-          navigate("/");
+          const currentUser = data?.data;
+          if (currentUser.role === "Organizer") {
+            navigate("/organizer/dashboard");
+          } else {
+            navigate("/"); // Redirect to homepage or customer dashboard
+          }
         }
       },
       onError: (error) => {
@@ -49,7 +47,8 @@ const SignIn = () => {
     password: yup.string().required("Password can not be empty !"),
   });
   return (
-    <div className="login__container d-flex justify-content-between">
+    <div className="login__container">
+    <div className="login__wrapper">
       <div className="login__img">
         <img src={loginImg} alt="" />
       </div>
@@ -69,13 +68,8 @@ const SignIn = () => {
         >
           {({ values, handleChange, handleBlur, handleSubmit, errors }) => (
             <Form
+            className="form__wrapper"
               onSubmit={handleSubmit}
-              style={{
-                height: "70%",
-                display: "flex",
-                flexDirection: "column",
-                gap: "20px",
-              }}
             >
               <input
                 type="text"
@@ -84,15 +78,8 @@ const SignIn = () => {
                 name="email"
                 onChange={handleChange}
                 value={values.email}
-                style={{
-                  height: 50,
-                }}
               />
-              {errors.email ? (
-                <ErrorMessage name="email"/>
-              ) : (
-                ""
-              )}
+              {errors.email ? <ErrorMessage name="email" /> : ""}
               <input
                 type="password"
                 placeholder="Password"
@@ -100,15 +87,8 @@ const SignIn = () => {
                 name="password"
                 onChange={handleChange}
                 value={values.password}
-                style={{
-                  height: 50,
-                }}
               />
-              {errors.password ? (
-                <ErrorMessage name="password"/>
-              ) : (
-                ""
-              )}
+              {errors.password ? <ErrorMessage name="password" /> : ""}
               <Button
                 className="btn secondary__btn auth__btn"
                 type="submit"
@@ -124,6 +104,7 @@ const SignIn = () => {
           Don't have an account? <Link to="/register">Create</Link>
         </p>
       </div>
+    </div>
     </div>
   );
 };

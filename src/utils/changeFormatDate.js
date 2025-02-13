@@ -10,3 +10,7 @@ export const changeFormatDate = (dateString) => {
   const formattedDate = `${day}-${month}-${year}`;
   return formattedDate;
 };
+export const changeFormatDateForSorting = (dateString) => {
+  const [day, month, year] = dateString.split("-"); // Split the string into components
+  return new Date(`${year}-${month}-${day}`).getTime();
+};

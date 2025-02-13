@@ -43,7 +43,8 @@ export const signOut = async (credentials) => {
   }
 };
 export const register = async (credentials) => {
-  const { email, password, username, phone } = credentials || {};
+  const { email, password, username, phone, confirmPassword } =
+    credentials || {};
   console.log("object in signIn", credentials);
   try {
     const response = await fetch(`${FETCH_URL}/auth/register`, {
@@ -58,6 +59,7 @@ export const register = async (credentials) => {
         email,
         password,
         phone,
+        confirmPassword,
       }),
     });
 
@@ -68,3 +70,4 @@ export const register = async (credentials) => {
     console.log(error);
   }
 };
+

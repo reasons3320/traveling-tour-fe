@@ -7,6 +7,7 @@ import {
   getTours,
   getToursByUserId,
   getToursForSearch,
+  updateTour,
 } from "../api/tourApi";
 import { createReviewMassage } from "../api/bookingApi";
 
@@ -44,7 +45,14 @@ export const useSubmitReviewForTourQuery = () => {
 export const useCreateTourQuery = () => {
   return useMutation({
     mutationFn: (tour) => {
-      createNewTour(tour);
+     return createNewTour(tour);
+    },
+  });
+};
+export const useUpdateTourQuery = () => {
+  return useMutation({
+    mutationFn: (tour) => {
+     return updateTour(tour);
     },
   });
 };

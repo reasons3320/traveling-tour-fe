@@ -11,11 +11,12 @@ import Glimmer from "../Suspense/Glimmer.jsx";
 import { FcStart } from "react-icons/fc";
 import { BiStar } from "react-icons/bi";
 import { averageCounting } from "../../utils/totalRateCounting.js";
+import { IoTime } from "react-icons/io5";
 const TourCard = ({ tour }) => {
   const {
     _id,
     title,
-    location,
+    location_id,
     photo,
     price,
     featured,
@@ -35,7 +36,7 @@ const TourCard = ({ tour }) => {
       data-aos-easing="ease-out-cubic"
       data-aos-offset="0"
     >
-      <Card>
+      <Card style={{height:"100%"}}>
         <div className="tour__img">
           <div className="average-rate">
             <div className="average-rate-number">{totalRate}</div>
@@ -55,23 +56,22 @@ const TourCard = ({ tour }) => {
           <img src={photo} alt="" />
           {featured && <span>Featured</span>}
         </div>
-        <CardBody>
+        <CardBody className="d-flex flex-column justify-content-between">
           <div className="card__top">
             {/* <div className="tour__rating d-flex align-items-center gap-1">
             </div> */}
             <div className="card__position">
-              <div>
-                <span className="">
-                  <FaLocationDot />
-                </span>
-                <div className="city">{location}</div>
+              <div style={{
+                width:"50%"
+              }}>
+                <div className="city"><FaLocationDot />{location_id?.city_name}</div>
               </div>
               <div className="card__top__duration">
-                Duration : {duration_days} Days
+              <IoTime /> : {duration_days} Days
               </div>
             </div>
             <div className="card__top__groupSize">
-              Available:{maxGroupSize} slots
+              Max group size: {maxGroupSize} slots
             </div>
           </div>
           <h5 className="tour__title">
@@ -79,8 +79,8 @@ const TourCard = ({ tour }) => {
           </h5>
           <div className="card__bottom d-flex align-items-center justify-content-between mt-3">
             <h5>
-              ${price}
-              <span>/person</span>
+              {price}
+              <span>VND/person</span>
             </h5>
             <button className="btn booking__btn">
               <Link to={`/tours/${_id}`}>Book Now</Link>

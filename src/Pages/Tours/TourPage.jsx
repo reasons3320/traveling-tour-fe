@@ -21,11 +21,9 @@ const TourPage = () => {
     date: "",
   });
   const { data, isLoading, isError } = useToursQuery(searchParams);
-  useEffect(()=>{
-    console.log(data);
-  },[data])
   const onHandleCheck = (e) => {
     const id = e.target.value;
+    console.log(id);
     let newTravelTypesArray = searchParams.travelTypes;
     const checked = newTravelTypesArray.some((item) => item === id);
     if (checked) {
@@ -41,6 +39,23 @@ const TourPage = () => {
       pageNum: 0,
     }));
   };
+  const onHandleChooseLocation = (value)=>{
+    setSearchParams((prev) => ({
+      ...prev,
+      location:value,
+      pageNum: 0,
+    }));
+  }
+  const resetFilter = ()=>{
+    setSearchParams({
+      search: "",
+      pageNum: 0,
+      pageSize: 8,
+      travelTypes: [],
+      cost: "",
+      date: "",
+    });
+  }
 
   const handleSearch = (e) => {
     setSearchParams((prev) => ({
@@ -71,6 +86,8 @@ const TourPage = () => {
             searchParams={searchParams}
             setSearchParams={setSearchParams}
             onHandleCheck={onHandleCheck}
+            onHandleChooseLocation={onHandleChooseLocation}
+            resetFilter={resetFilter}
           />
         </div>
 
@@ -94,11 +111,11 @@ const TourPage = () => {
                   <LoadingPage />
                 ) : data?.count >= 1 ? (
                   <Container className="data-container overflow-auto py-3 px-0 d-flex flex-column">
-                    <Row className="data-row row gap-0 w-lg-100 w-100 d-flex justify-content-center justify-content-md-start m-0 justify-content-lg-start">
+                    <Row className="data-row row row-gap-4 w-lg-100 w-100 d-flex justify-content-center justify-content-md-start m-0 justify-content-lg-start">
                       {data?.data?.map((tour) => (
                         <Col
                           key={tour._id}
-                          className="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 col-xxl-3 w-lg-100"
+                          className="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 col-xxl-3 w-lg-100 d-flex justify-content-center" 
                         >
                           <TourCard tour={tour} />
                         </Col>

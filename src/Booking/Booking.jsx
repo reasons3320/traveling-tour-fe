@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Booking.scss";
 import { Button, ListGroup, ListGroupItem } from "reactstrap";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useBookingTourMutation } from "../helper/bookingQuery";
 import toast from "react-hot-toast";
 import { getTourSchedulesByTourIdQuery } from "../helper/tourScheduleQuery";
@@ -10,37 +10,53 @@ import { Radio, Select } from "antd";
 import { Formik, Field } from "formik";
 import * as yup from "yup";
 import { changeFormatDate } from "../utils/changeFormatDate";
+import { IoTennisball } from "react-icons/io5";
+import { logout } from "../redux/userSlice";
+import moment from "moment";
 const Booking = ({ tour, avgRating }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
   const [avaiOrNull, setAvaiOrNull] = useState(1); // Toggle between available date and new date
   const [tourScheduleId, setTourScheduleId] = useState("");
   const { _id, price, reviews, maxGroupSize } = tour || {};
+  const [availableTourDate, setAvailableTourDate] = useState([]);
+  const [currentTourSchedule, setCurrentTourSchedule] = useState();
   const { data = [], isLoading } = getTourSchedulesByTourIdQuery(_id);
-
+  useEffect(() => {
+    const newArr = data.filter((item) => item?.userId?.role !== "Customer");
+    setAvailableTourDate(newArr);
+  }, [data]);
+  useEffect(() => {
+    const current = availableTourDate?.find(
+      (item) => item._id === tourScheduleId
+    );
+    setCurrentTourSchedule(current);
+  }, [tourScheduleId]);
   const serviceFee = 10;
 
-  const { mutate } = useBookingTourMutation();
+  const { mutate, isPending } = useBookingTourMutation();
 
   // Validation Schema
   const validationSchema = yup.object({
     username: yup.string().required("Full Name is required"),
     phone: yup.string().required("Phone is required"),
-    availableDate: yup.string().when("avaiOrNull", {
-      is: 1,
-      then: yup.string().required("Please select a date"),
-    }),
+    availableDate: yup.string().required("Please choose day !")
+    ,
     guestSize: yup
       .number()
       .min(1, "Minimum 1 guest")
-      .max(maxGroupSize, `Maximum ${maxGroupSize} guests allowed`)
+      .max(
+        currentTourSchedule?.available_capacity ? currentTourSchedule?.available_capacity : 20,
+        `Maximum ${currentTourSchedule?.available_capacity || 20} guest slots remain`
+      )
       .required("Guest Size is required"),
   });
 
   const handleSubmit = (values) => {
-    console.log("Values is ", values);
     if (!user) {
       toast.error("Please Sign In");
+      dispatch(logout())
       navigate("/login");
       return;
     }
@@ -51,8 +67,8 @@ const Booking = ({ tour, avgRating }) => {
       phone: values.phone,
       guestSize: values.guestSize,
       tour_schedule_id: values.availableDate,
-      tourId:_id,
-      bookingDate:changeFormatDate(values.bookingDate),
+      tourId: _id,
+      bookingDate: changeFormatDate(values.availableDate),
       totalPrice: Number(price) * Number(values.guestSize) + serviceFee,
     };
 
@@ -63,6 +79,8 @@ const Booking = ({ tour, avgRating }) => {
       },
       onError: (error) => {
         toast.error(error.message || "Booking failed");
+        dispatch(logout());
+        navigate("/login");
       },
     });
   };
@@ -88,7 +106,7 @@ const Booking = ({ tour, avgRating }) => {
           initialValues={{
             username: user?.username || "",
             phone: user?.phone || "",
-            availableDate: "",
+            availableDate: moment().format("YYYY-MM-DD"),
             guestSize: 1,
           }}
           validationSchema={validationSchema}
@@ -147,16 +165,16 @@ const Booking = ({ tour, avgRating }) => {
                       setFieldValue("availableDate", value);
                       setTourScheduleId(value);
                     }}
-                    options={data?.map((item) => ({
+                    options={availableTourDate?.map((item) => ({
                       value: item._id,
                       label: changeFormatDate(item.available_date),
                     }))}
                   />
                   <div>
                     Available Slots :{" "}
-                    {data?.find(
-                      (item) => item._id === tourScheduleId
-                    )?.available_capacity
+                    {
+                      data?.find((item) => item._id === tourScheduleId)
+                        ?.available_capacity
                     }
                   </div>
                   {errors.availableDate && touched.availableDate && (
@@ -164,15 +182,21 @@ const Booking = ({ tour, avgRating }) => {
                   )}
                 </>
               ) : (
+                <>
                 <Field
                   type="date"
-                  id="bookingDate"
-                  name="bookingDate"
+                  id="availableDate"
+                  name="availableDate"
                   className="form-control"
-                  onChange={(e)=>{
-                    setFieldValue("bookingDate", e.target.value);
+                  onChange={(e) => {
+                    setFieldValue("availableDate", e.target.value);
                   }}
-                />
+                  />
+                       {errors.availableDate && touched.availableDate && (
+                    <div className="error">{errors.availableDate}</div>
+                  )}
+                  </>
+                
               )}
 
               <Field
@@ -199,8 +223,12 @@ const Booking = ({ tour, avgRating }) => {
                   <div>${price * values.guestSize + serviceFee}</div>
                 </div>
               </div>
-              <Button className="btn primary__btn w-100" type="submit">
-                Book Now
+              <Button
+                className="btn primary__btn w-100"
+                type="submit"
+                disabled={isPending}
+              >
+                {isPending ? <div>Loading...</div> : "Book Now"}
               </Button>
             </form>
           )}

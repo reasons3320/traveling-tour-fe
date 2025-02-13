@@ -3,7 +3,10 @@ import Accordion from "./Accordion";
 import "./Questions.scss";
 import Aos from "aos";
 import "aos/dist/aos.css";
+import { questionContent } from "./question.lang";
+import { getContentByLanguage } from "../../context/languageUseCase";
 const Questions = () => {
+  const language = getContentByLanguage(questionContent);
   useEffect(() => {
     Aos.init({ duration: 2000 });
   }, []);
@@ -13,7 +16,7 @@ const Questions = () => {
   return (
     <div className="questions section container">
       <div className="secHeading">
-        <h3 data-aos="fade-up">Frequently Asked Questions</h3>
+        <h3 data-aos="fade-up">{language.title}</h3>
       </div>
       <div className="secContainer grid">
         <div className="accordion grid" data-aos="fade-up">
@@ -40,24 +43,23 @@ const Questions = () => {
 
         <div className="form">
           <div className="secHeading">
-            <h4 data-aos="fade-down">Do you have any specific questions?</h4>
+            <h4 data-aos="fade-down">{language.secondTitle}</h4>
             <p data-aos="fade-down">
-              Please fill the form below and our dedicated team will get in
-              touch with you as soon as possible
+              {language.desc}
             </p>
           </div>
           <div className="formContent grid">
             <input
               data-aos="fade-down"
               type="email"
-              placeholder="Enter email address"
+              placeholder={language.placeholder1}
             />
             <textarea
               data-aos="fade-down"
-              placeholder="Enter your question here"
+              placeholder={language.placeholder2}
             ></textarea>
             <button data-aos="fade-down" className="btn">
-              Submit Inquiry
+              {language.btn}
             </button>
           </div>
         </div>

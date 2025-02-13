@@ -1,0 +1,14 @@
+// .ant-layout-sider-children{
+//     background-color: white;
+// }
+.layout-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    padding:10px;
+    background-color: white;
+    h3{
+        margin: 0 ;
+    }
+}

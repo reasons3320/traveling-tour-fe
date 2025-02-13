@@ -2,7 +2,10 @@ import React, { useEffect } from "react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import galleryImages from "./galerryImages";
 import Aos from "aos";
+import { getContentByLanguage } from "../../context/languageUseCase";
+import { galleryContent } from "./galery.lang";
 const MasonryImagesGallery = () => {
+    const language = getContentByLanguage(galleryContent);
   useEffect(()=>{
     Aos.init({
       duration:2000
@@ -14,10 +17,9 @@ const MasonryImagesGallery = () => {
       className="container"
     >
       <div className="textDiv">
-        <h4 data-aos="fade-up">Gallery!</h4>
+        <h4 data-aos="fade-up">{language.title}</h4>
         <p data-aos="fade-up">
-          We offer personalized itineraries tailored to individual preferences
-          and interests
+          {language.desc}
         </p>
       </div>
       <Masonry gutter="1rem">

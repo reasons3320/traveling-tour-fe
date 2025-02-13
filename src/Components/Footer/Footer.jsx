@@ -27,16 +27,16 @@ const Footer = () => {
             Information
           </span>
           <li>
-            <a href="#">Home</a>
+            <a href="/">Home</a>
           </li>
           <li>
-            <a href="#">Explore</a>
+            <a href="/tours">Tours</a>
           </li>
           <li>
-            <a href="#">Travel</a>
+            <a href="/aboutUs">About Us</a>
           </li>
           <li>
-            <a href="#">Blog</a>
+            <a href="/blogs">Blog</a>
           </li>
         </div>
         <div className="footerLinks" >
@@ -50,7 +50,7 @@ const Footer = () => {
             <a href="#">Support</a>
           </li>
           <li>
-            <a href="#">Travel & COndition</a>
+            <a href="#">Travel & Condition</a>
           </li>
           <li>
             <a href="#">Privacy</a>

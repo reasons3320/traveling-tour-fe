@@ -3,7 +3,10 @@ import "./Middle.scss";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import Counter from "./Counter";
+import { getContentByLanguage } from "../../context/languageUseCase";
+import { middleContent } from "./middle.lang";
 const Middle = () => {
+    const language = getContentByLanguage(middleContent);
   useEffect(() => {
     Aos.init({ duration: 2000 });
   }, []);
@@ -13,19 +16,19 @@ const Middle = () => {
         <div className="grid">
           <span className="flex" data-aos="fade-up">
           <Counter startValue={50} endValue={159} duration={2000}/>
-            <p>World Of Experiences</p>
+            <p>{language.experience}</p>
           </span>
           <span className="flex" data-aos="fade-up">
             <Counter startValue={2000} endValue={2173} duration={2000}/>
-            <p>Fine Destinations</p>
+            <p>{language.destination}</p>
           </span>
           <span className="flex" data-aos="fade-up">
           <Counter startValue={4900} endValue={5192} duration={2000}/>
-            <p>Customer Reviews</p>
+          <p>{language.reviews}</p>
           </span>
           <span className="flex" data-aos="fade-up">
             <h1>4.8</h1>
-            <p>Overall Rating</p>
+            <p>{language.rating}</p>
           </span>
         </div>
       </div>

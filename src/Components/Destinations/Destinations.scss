@@ -40,11 +40,23 @@
     }
     .destinationContainer {
       margin-top: 2rem;
+      .skeleton-section{
+        width: 100%;
+        border-radius: 10px;
+        .skeleton-card{
+          width: 100%;
+          .ant-skeleton{
+            width: 100%;
+          }
+        }
+      }
       .singleDestination {
         position: relative;
         overflow: hidden;
         border-radius: 1rem;
         height: 260px;
+        background-color: red;
+        padding: 20px !important;
         @include shadowAnimation(2s, ease-in-out);
         .imgDiv {
           position: relative;
@@ -88,36 +100,6 @@
               rgba(0, 0, 0, 0.76)
             );
             z-index: -1;
-          }
-          .text {
-            gap: 0.5rem;
-            color: var(--whiteColor);
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            .name {
-              display: block;
-              font-weight: 500;
-              padding-bottom: 0.3rem;
-              font-weight: var(--h2FontSize);
-            }
-            .flex{
-              margin: 0;
-            }
-            .flex,
-            .icon {
-              font-size: var(--normalFontSize);
-            }
-          }
-          .rating {
-            padding: 8px 1rem;
-            border-radius: var(--borderRadius);
-            background: rgba(245, 245, 245, 0.37);
-            border: 1.5px solid rgba(255, 255, 255, 0.241);
-            font-size: var(--h3FontSize);
-            font-weight: 600;
-            color: var(--whiteColor);
           }
         }
       }
@@ -165,10 +147,53 @@
           }
         }
       }
+      .destinationContainer{
+        display: block;
+      }
     }
   }
 }
-@media screen and (min-width: 1014px) {
+@media screen and (min-width: 765px) {
+  .destination {
+    .secContainer {
+      .secMenu {
+        display: block;
+        .flex {
+          width: 100%;
+          margin: 2.5rem auto;
+          justify-content: center;
+          gap: 1rem;
+          li {
+            background: transparent;
+            padding: 10px 17px;
+            border-radius: var(--borderRadius);
+            color: var(--blackColor);
+            border: 1.5px dashed transparent;
+            cursor: pointer;
+            &:hover {
+              color: var(--primaryColor);
+              border: 1.5px dashed var(--primaryColor);
+            }
+          }
+          .active {
+            color: var(--primaryColor);
+            border: 1.5px dashed var(--primaryColor);
+          }
+        }
+      }
+      .destinationContainer{
+        display: grid;
+        grid-template-columns: repeat(3,1);
+        .empty-section{
+          position: relative;
+          width: 100% !important;
+          background-color: grey;
+        }
+      }
+    }
+  }
+}
+@media screen and (min-width: 1023px) {
   .destination {
     .secContainer {
       .secTitle {
@@ -183,9 +208,10 @@
         }
       }
       .secMenu {
+        margin: auto;
         .flex {
-          justify-content: left;
           ul {
+            background-color: brown;
             li {
               background: transparent;
               padding: 10px 17px;
@@ -208,9 +234,19 @@
       .searchField {
         grid-template-columns: repeat(4, 1fr);
       }
-      // .destinationContainer {
-      //   grid-template-columns: repeat(3, 1fr);
-      // }
+      .destinationContainer {
+        margin: auto;
+        width: 100%;
+        .skeleton-section{
+          width: 100%;
+        }
+        .empty-section{
+          position: relative !important;
+          transform: translateX(50%);
+          width:  100%;
+          margin: auto !important;
+        }
+      }
     }
   }
 }

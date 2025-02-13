@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getTourTypes } from "../api/tourTypeApi";
+import { getLocations, getTourTypes } from "../api/tourTypeApi";
 
 export const getTourTypesQuery = () => {
   return useQuery({
@@ -7,3 +7,9 @@ export const getTourTypesQuery = () => {
     queryFn: getTourTypes,
   });
 };
+export const getLocationsQuery = ()=>{
+  return useQuery({
+    queryKey: ["locations"],
+    queryFn: getLocations,
+  });
+}
