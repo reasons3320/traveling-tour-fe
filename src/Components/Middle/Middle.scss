@@ -8,14 +8,14 @@
       justify-content: center;
       margin: 20px auto;
       gap: 2rem;
-
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       span {
         justify-content: center;
         gap: 0.5rem;
         h1 {
           font-size: var(--h1FontSize);
           font-weight: 700;
-          color: var(--blackColor);
+          color: var(--primaryColor);
         }
         p {
           opacity: 0.8;

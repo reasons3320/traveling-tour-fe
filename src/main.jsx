@@ -45,7 +45,12 @@ const isTokenExpired = (token) => {
 const OrganizerRoutes = () => {
   const user = useSelector((state) => state.user.user);
 
-  if (!user || !user.token || isTokenExpired(user.token) || user.role !== "Organizer") {
+  if (
+    !user ||
+    !user.token ||
+    isTokenExpired(user.token) ||
+    user.role !== "Organizer"
+  ) {
     return <Navigate to="/login" replace />;
   }
 

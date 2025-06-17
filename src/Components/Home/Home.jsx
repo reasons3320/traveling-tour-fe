@@ -11,7 +11,7 @@ import "aos/dist/aos.css";
 import { getContentByLanguage } from "../../context/languageUseCase";
 import { homeContent } from "./home.lang";
 const Home = () => {
-   const language = getContentByLanguage(homeContent);
+  const language = getContentByLanguage(homeContent);
   useEffect(() => {
     Aos.init({ duration: 2000 });
   }, []);
@@ -21,24 +21,16 @@ const Home = () => {
         <video src={bgVideo} autoPlay muted loop></video>
       </div>
       <div className="sectionText">
-        <h1 data-aos="fade-up">{language?.unlock}</h1>
-        <p data-aos="fade-up">
-          {
-            language?.discovery
-          }
-        </p>
+        <p className="text">{language?.unlock}</p>
+        <p data-aos="fade-up">{language?.discovery}</p>
         <button className="btn flex" data-aos="fade-up">
-        {
-            language?.btnTitle
-          }
+          {language?.btnTitle}
           <AiOutlineSwapRight className="icon" />
         </button>
       </div>
       <div className="popularPlaces">
         <div className="content">
-          <h3 data-aos="fade-up">    {
-            language?.popular
-          }</h3>
+          <h3 data-aos="fade-up"> {language?.popular}</h3>
           <div className="images flex" data-aos="fade-up">
             <img src={img1} alt="Destination" />
             <img src={img2} alt="Destination" />

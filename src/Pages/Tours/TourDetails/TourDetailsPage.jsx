@@ -10,7 +10,6 @@ import { Container, Row, Col, Form, ListGroup } from "reactstrap";
 import { useParams } from "react-router-dom";
 import calculateAvgRating from "../../../utils/avgCalculate";
 import avatar from "../../../assets/avt3.jpg";
-import Booking from "../../../Booking/Booking";
 import { useGetSingleTourQuery } from "../../../helper/tourQuery";
 import { MdStar } from "react-icons/md";
 import { useSelector } from "react-redux";
@@ -19,6 +18,7 @@ import toast from "react-hot-toast";
 import { useQueryClient } from "@tanstack/react-query";
 import { Skeleton } from "antd";
 import { Helmet } from "react-helmet";
+import Booking from "../../Booking/Booking";
 const TourDetailsPage = () => {
   const { tourId } = useParams();
   const queryClient = useQueryClient();
@@ -105,7 +105,7 @@ const TourDetailsPage = () => {
   }, [tour]);
   return (
     <div className="TourDetailsSection">
-          <Helmet>
+      <Helmet>
         <meta charSet="utf-8" />
         <title>{title}</title>
         <link rel="canonical" href={`http://localhost:5173/tours/${tourId}`} />

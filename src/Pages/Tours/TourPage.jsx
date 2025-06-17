@@ -15,7 +15,7 @@ const TourPage = () => {
   const [searchParams, setSearchParams] = useState({
     search: "",
     pageNum: 0,
-    pageSize: 8,
+    pageSize: 10,
     travelTypes: [],
     cost: "",
     date: "",
@@ -39,14 +39,14 @@ const TourPage = () => {
       pageNum: 0,
     }));
   };
-  const onHandleChooseLocation = (value)=>{
+  const onHandleChooseLocation = (value) => {
     setSearchParams((prev) => ({
       ...prev,
-      location:value,
+      location: value,
       pageNum: 0,
     }));
-  }
-  const resetFilter = ()=>{
+  };
+  const resetFilter = () => {
     setSearchParams({
       search: "",
       pageNum: 0,
@@ -55,7 +55,7 @@ const TourPage = () => {
       cost: "",
       date: "",
     });
-  }
+  };
 
   const handleSearch = (e) => {
     setSearchParams((prev) => ({
@@ -115,7 +115,7 @@ const TourPage = () => {
                       {data?.data?.map((tour) => (
                         <Col
                           key={tour._id}
-                          className="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 col-xxl-3 w-lg-100 d-flex justify-content-center" 
+                          className="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 col-xxl-3 w-lg-100 d-flex justify-content-center"
                         >
                           <TourCard tour={tour} />
                         </Col>

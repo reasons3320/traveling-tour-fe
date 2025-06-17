@@ -97,6 +97,9 @@
       }
     }
   }
+  .navbar-auth-btn:hover {
+    color: grey !important;
+  }
   @media screen and (max-width: 765px) {
     .menu {
       position: absolute;
@@ -184,7 +187,5 @@
     .menuIcon {
       display: none;
     }
- 
   }
 }
-

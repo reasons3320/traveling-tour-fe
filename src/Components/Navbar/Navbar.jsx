@@ -27,12 +27,12 @@ const Navbar = () => {
     },
     {
       path: "/aboutUs",
-      title:language?.about,
+      title: language?.about,
     },
 
     {
       path: "/blogs",
-      title:language?.blogs,
+      title: language?.blogs,
     },
   ];
   console.log(language);
@@ -77,12 +77,19 @@ const Navbar = () => {
         </ul>
         <AiFillCloseCircle className="icon closeIcon" onClick={removeNavbar} />
       </div>
-      <div style={{
-        display:'flex',
-        gap:"10px",
-        alignItems:'center'
-      }}>
-        <Switch checkedChildren="EN" unCheckedChildren="VI" defaultChecked onChange={handleChangeLanguage}/>
+      <div
+        style={{
+          display: "flex",
+          gap: "10px",
+          alignItems: "center",
+        }}
+      >
+        <Switch
+          checkedChildren="EN"
+          unCheckedChildren="VI"
+          defaultChecked
+          onChange={handleChangeLanguage}
+        />
         <FaEarthAsia
           onClick={() => {
             setLanguage("VI");
@@ -104,6 +111,7 @@ const Navbar = () => {
                 alignItems: "center",
                 textDecoration: "underline",
               }}
+              className="navbar-auth-btn"
             >
               Sign In
             </Link>
@@ -117,6 +125,7 @@ const Navbar = () => {
                 alignItems: "center",
                 textDecoration: "underline",
               }}
+              className="navbar-auth-btn"
             >
               Sign Up
             </Link>

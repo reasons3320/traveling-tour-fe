@@ -152,7 +152,7 @@ const AboutUsPage = () => {
                         <Tag className="values-section-tag">
                           <p style={{
                             fontSize:"1rem",
-                            fontFamily:"Sour Gummy"
+                            fontFamily:"Montserrat"
                           }}>{value}</p>
                         </Tag>
                       ))}

@@ -23,6 +23,7 @@ import Slider from "react-slick";
 import { getContentByLanguage } from "../../context/languageUseCase";
 import { destinationContent } from "./destination.lang";
 import { languageContext } from "../../context/LanguageContext";
+import { getTourTypesQuery } from "../../helper/tourTypeQuery";
 const menuLists = [
   {
     title: "All",
@@ -51,7 +52,7 @@ const menuLists = [
   },
 ];
 const settings = {
-  dots: true,
+  // dots: true,
   infinite: true,
   speed: 500,
   slidesToShow: 4,
@@ -63,7 +64,6 @@ const settings = {
         slidesToShow: 3,
         slidesToScroll: 2,
         infinite: true,
-        dots: true,
       },
     },
     {
@@ -89,21 +89,44 @@ const Destinations = () => {
   const navigate = useNavigate();
   const [isActive, setIsActive] = useState("All");
   const [currentData, setCurrentData] = useState([]);
+  const [tourTypes, setTourTypes] = useState();
   const handleSetActive = (title) => {
     setIsActive(title);
   };
-  const { data, isLoading } = useToursQuery(0, "", []);
+  const { data, isLoading } = useToursQuery({
+    page: 1,
+    limit: 10,
+    travelTypes: isActive === "All" ? "" : isActive,
+  });
+  const { data: tourTypeDatas, isLoading: tourTypeLoading } =
+    getTourTypesQuery();
+  // const { data, isLoading } = useToursQuery({ travelTypes: isActive });
+
+  // useEffect(() => {
+  //   if (isActive !== "All") {
+  //     const filteredArray =
+  //       data?.data?.filter((item) =>
+  //         item.types.some((type) => type.tour_code === isActive)
+  //       ) || [];
+  //     debugger;
+  //     setCurrentData(filteredArray);
+  //   } else {
+  //     setCurrentData(data?.data);
+  //   }
+  // }, [data, isActive]);
   useEffect(() => {
-    if (isActive !== "All") {
-      const filteredArray =
-        data?.data?.filter((item) =>
-          item.types.some((type) => type.tour_code === isActive)
-        ) || [];
-      setCurrentData(filteredArray);
-    } else {
-      setCurrentData(data?.data);
-    }
-  }, [data, isActive]);
+    const AddingAllValue = tourTypeDatas?.unshift({
+      _id: "All",
+      name: "All",
+    });
+    console.log("AddingAllValue", AddingAllValue);
+    setTourTypes(tourTypeDatas);
+  }, [tourTypeDatas]);
+  useEffect(() => {
+    console.log("Data", data);
+    setCurrentData(data?.data || []);
+  }, [data]);
+
   useEffect(() => {
     Aos.init({ duration: 2000 });
   }, []);
@@ -111,30 +134,20 @@ const Destinations = () => {
     <div className="destination section container">
       <div className="secContainer">
         <div className="secTitle">
-          <span className="redText" data-aos="fade-up">
-            {language.explore}
-          </span>
-          <h3 data-aos="fade-up"> {language.findYourDream}</h3>
-          {/* <p data-aos="fade-up">
-            Fill in the fields below to find the best spot for your next tour
-          </p> */}
+          <span className="redText">{language.explore}</span>
+          <h3> {language.findYourDream}</h3>
         </div>
-        {/* <div className="searchField grid">
-          <div className="inputField flex" data-aos="fade-up">
-            <MdLocationPin className="icon" />
-            <input type="text" placeholder="Location" />
-          </div>
-        </div>  */}
         <div className="secMenu">
-          <ul className="flex" data-aos="fade-up">
-            {menuLists.map((item, index) => (
+          <ul className="flex">
+            {tourTypes?.map((item, index) => (
               <li
                 key={index}
-                value={item.title}
-                onClick={() => handleSetActive(item.value)}
-                className={item.value === isActive ? "active" : ""}
+                value={item._id}
+                onClick={() => handleSetActive(item._id)}
+                className={item._id === isActive ? "active" : ""}
               >
-                {t === "VI" ? item.vTitle : item.title}
+                {/* {t === "VI" ? item.vTitle : item.title} */}
+                {item.name}
               </li>
             ))}
           </ul>
@@ -148,6 +161,7 @@ const Destinations = () => {
                     style={{
                       width: "100%",
                       height: 220,
+                      minWidth: 350,
                     }}
                     active
                   />
@@ -156,21 +170,19 @@ const Destinations = () => {
             ))}
           </div>
         ) : currentData?.length > 0 ? (
-          <div
-            style={{
-              width: "100%",
-              minHeight: "300px",
-            }}
-            // className="slider-container"
-          >
+          currentData.length === 1 ? (
+            <div className="single-slide-wrapper">
+              <DestinationCard item={currentData[0]} index={0} />
+            </div>
+          ) : (
             <Slider {...settings}>
-              {/* <div className="destinationContainer grid"> */}
               {currentData.slice(0, 10).map((item, index) => (
-                <DestinationCard item={item} />
+                <div key={index}>
+                  <DestinationCard item={item} index={index} />
+                </div>
               ))}
-              {/* </div> */}
             </Slider>
-          </div>
+          )
         ) : (
           <div className="empty-section">
             <Empty />

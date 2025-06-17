@@ -22,9 +22,14 @@
     bottom: 50%;
     color: var(--whiteColor);
     padding: 0 1.3rem;
-    h1 {
+    .text {
+      // overflow: hidden;
       font-size: var(--biggestFontSize);
       font-weight: 900;
+      // text-wrap: nowrap;
+      // // margin: 100px;
+      // // width: 750px;
+      // animation: typing 3s steps(100) infinite alternate-reverse;
     }
     p {
       padding: 1rem 0;
@@ -41,6 +46,14 @@
   }
   .popularPlaces {
     display: none;
+  }
+}
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 750px;
   }
 }
 @media screen and (min-width: 480px) {
@@ -143,9 +156,17 @@
   }
 }
 // animate
-@keyframes aboutShadow  {
-  10%   {box-shadow:  0 0 4px rgb(229, 255, 0);}
-  25%   {box-shadow:  0 0 6px #dff669f5;}
-  50%   {box-shadow:  0 0 8px #b5c114ef;}
-  100% {box-shadow:  0 0 10px #0000003a;}
+@keyframes aboutShadow {
+  10% {
+    box-shadow: 0 0 4px rgb(229, 255, 0);
+  }
+  25% {
+    box-shadow: 0 0 6px #dff669f5;
+  }
+  50% {
+    box-shadow: 0 0 8px #b5c114ef;
+  }
+  100% {
+    box-shadow: 0 0 10px #0000003a;
+  }
 }

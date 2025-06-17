@@ -12,6 +12,7 @@ import { FcStart } from "react-icons/fc";
 import { BiStar } from "react-icons/bi";
 import { averageCounting } from "../../utils/totalRateCounting.js";
 import { IoTime } from "react-icons/io5";
+import { formatVND } from "../../utils/formatToVnd.js";
 const TourCard = ({ tour }) => {
   const {
     _id,
@@ -36,17 +37,17 @@ const TourCard = ({ tour }) => {
       data-aos-easing="ease-out-cubic"
       data-aos-offset="0"
     >
-      <Card style={{height:"100%"}}>
+      <Card style={{ height: "100%" }}>
         <div className="tour__img">
           <div className="average-rate">
             <div className="average-rate-number">{totalRate}</div>
-            <div className="star-icon"> <BiStar /></div>
+            <div className="star-icon">
+              {" "}
+              <BiStar />
+            </div>
             <div className="average-rate-types">
               {types?.map((type, index) => (
-                <div
-                className="types-tag"
-                  key={index}
-                >
+                <div className="types-tag" key={index}>
                   {type.name}
                 </div>
               ))}
@@ -61,13 +62,18 @@ const TourCard = ({ tour }) => {
             {/* <div className="tour__rating d-flex align-items-center gap-1">
             </div> */}
             <div className="card__position">
-              <div style={{
-                width:"50%"
-              }}>
-                <div className="city"><FaLocationDot />{location_id?.city_name}</div>
+              <div
+                style={{
+                  width: "50%",
+                }}
+              >
+                <div className="city">
+                  <FaLocationDot />
+                  {location_id?.city_name}
+                </div>
               </div>
               <div className="card__top__duration">
-              <IoTime /> : {duration_days} Days
+                <IoTime /> : {duration_days} Days
               </div>
             </div>
             <div className="card__top__groupSize">
@@ -79,7 +85,7 @@ const TourCard = ({ tour }) => {
           </h5>
           <div className="card__bottom d-flex align-items-center justify-content-between mt-3">
             <h5>
-              {price}
+              {formatVND(price)}
               <span>VND/person</span>
             </h5>
             <button className="btn booking__btn">

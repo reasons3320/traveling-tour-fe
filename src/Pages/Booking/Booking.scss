@@ -12,7 +12,7 @@
   font-weight: 700;
 }
 .booking__top h3 span {
-  font-size: .8rem;
+  font-size: 0.8rem;
   font-weight: 400;
   color: var(--text-color);
 }
@@ -37,7 +37,7 @@
   width: 100%;
   color: var(--heading-color);
   font-size: 1rem;
-  border: none ;
+  border: none;
   border-bottom: 1px solid rgb(229, 231, 235);
 }
 .booking__form input:focus {
@@ -61,16 +61,33 @@
 .booking__bottom {
   margin-top: 1rem;
 }
-.total,.service-fee{
+.total,
+.service-fee {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.total,.service-fee div {
+.total,
+.service-fee div {
   color: var(--heading-color) !important;
   font-weight: 700 !important;
   font-size: 1.1rem !important;
 }
-.error{
+.error {
   color: red;
+}
+.form-control {
+  border: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.19);
+  height: 42px;
+}
+.custom-select {
+  .ant-select-selector {
+    height: 42px !important;
+    border: none !important;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.19);
+  }
+  .ant-select-arrow {
+    margin: auto !important;
+  }
 }
