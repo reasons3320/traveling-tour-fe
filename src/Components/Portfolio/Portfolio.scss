@@ -29,27 +29,27 @@
           flex-direction: column;
           position: relative;
           .number {
-            font-size: 2.25rem;
-            width: 70px;
-            height: 70px;
+            width: 60px;
+            height: 60px;
+            font-size: 2.25rem !important;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             color: white;
-            margin: 0;
-            display: block;
             position: absolute;
-            right: 20px;
+            right: -30px;
             top: 0;
             background-color: orange;
             border-radius: 100%;
-            padding: 10px;
-            text-align: center;
             z-index: 99;
+            border: 5px solid white;
           }
           .iconDiv {
-            width: 200px;
-            height: 200px;
+            width: 150px;
+            height: 150px;
             border-radius: 100%;
-            border: 1px solid pink;
             position: relative;
+            background-color: rgb(253, 242, 199);
             .desIcon {
               position: absolute;
               height: 100px;

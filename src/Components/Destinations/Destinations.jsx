@@ -52,11 +52,12 @@ const menuLists = [
   },
 ];
 const settings = {
-  // dots: true,
+  dots: false,
   infinite: true,
   speed: 500,
   slidesToShow: 4,
   slidesToScroll: 2,
+  arrows: true,
   responsive: [
     {
       breakpoint: 1025,
@@ -131,7 +132,7 @@ const Destinations = () => {
     Aos.init({ duration: 2000 });
   }, []);
   return (
-    <div className="destination section container">
+    <div className="destination container">
       <div className="secContainer">
         <div className="secTitle">
           <span className="redText">{language.explore}</span>

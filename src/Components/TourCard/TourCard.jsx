@@ -40,11 +40,11 @@ const TourCard = ({ tour }) => {
       <Card style={{ height: "100%" }}>
         <div className="tour__img">
           <div className="average-rate">
-            <div className="average-rate-number">{totalRate}</div>
+            {/* <div className="average-rate-number">{totalRate}</div>
             <div className="star-icon">
               {" "}
               <BiStar />
-            </div>
+            </div> */}
             <div className="average-rate-types">
               {types?.map((type, index) => (
                 <div className="types-tag" key={index}>
@@ -86,7 +86,14 @@ const TourCard = ({ tour }) => {
           <div className="card__bottom d-flex align-items-center justify-content-between mt-3">
             <h5>
               {formatVND(price)}
-              <span>VND/person</span>
+              <span
+                style={{
+                  textDecoration: "underline",
+                  color: "#FAA935",
+                }}
+              >
+                đ
+              </span>
             </h5>
             <button className="btn booking__btn">
               <Link to={`/tours/${_id}`}>Book Now</Link>

@@ -11,7 +11,7 @@ import "aos/dist/aos.css";
 import { getContentByLanguage } from "../../context/languageUseCase";
 import { reviewContent } from "./review.lang";
 const Reviews = () => {
-   const language = getContentByLanguage(reviewContent);
+  const language = getContentByLanguage(reviewContent);
   useEffect(() => {
     Aos.init({ duration: 2000 });
   }, []);
@@ -20,23 +20,51 @@ const Reviews = () => {
       <div className="secContainer" data-aos="fade-up">
         <div className="textDiv">
           <span className="redText">{language.fromOurClients}</span>
-          <h3 data-aos="fade-up">
+          <h3
+            data-aos="fade-up"
+            style={{
+              fontFamily: "Sour Gummy",
+            }}
+          >
             {language.secondTitle}
           </h3>
-          <p data-aos="fade-up">
-            {language.desc}
-          </p>
+          <p data-aos="fade-up">{language.desc}</p>
         </div>
-        <div className="review-stars flex" >
-        {Array.from({ length: 5 }, (_, index) => (
-        <AiFillStar key={index} className="icon" data-aos="fade-up" data-aos-delay={900}/>
-      ))}
+        <div className="review-stars flex">
+          {Array.from({ length: 5 }, (_, index) => (
+            <AiFillStar
+              key={index}
+              className="icon"
+              data-aos="fade-up"
+              data-aos-delay={900}
+            />
+          ))}
         </div>
         <div className="clientsImages flex">
-          <img src={avt1} alt="Client Image" data-aos="fade-up" data-aos-duration="500"/>
-          <img src={avt2} alt="Client Image" data-aos="fade-up" data-aos-duration="600"/>
-          <img src={avt3} alt="Client Image" data-aos="fade-up" data-aos-duration="700"/>
-          <img src={avt4} alt="Client Image" data-aos="fade-up" data-aos-duration="800"/>
+          <img
+            src={avt1}
+            alt="Client Image"
+            data-aos="fade-up"
+            data-aos-duration="500"
+          />
+          <img
+            src={avt2}
+            alt="Client Image"
+            data-aos="fade-up"
+            data-aos-duration="600"
+          />
+          <img
+            src={avt3}
+            alt="Client Image"
+            data-aos="fade-up"
+            data-aos-duration="700"
+          />
+          <img
+            src={avt4}
+            alt="Client Image"
+            data-aos="fade-up"
+            data-aos-duration="800"
+          />
         </div>
       </div>
     </div>

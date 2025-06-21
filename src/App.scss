@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap");
 html,
 body {
   padding: 0;
@@ -8,7 +8,7 @@ body {
   scroll-behavior: auto;
 }
 :root {
-  --primaryColor: hsl(14, 90%, 53%);
+  --primaryColor: #f34e1b;
   --primaryColorLight: hsl(14, 96%, 91%);
   --bgColor: hsl(0, 0%, 100%);
   --formColor: hsl(20, 42%, 87%);
@@ -187,4 +187,9 @@ video {
 .ant-select,
 .ant-card-head-title {
   font-family: "Montserrat", serif;
+}
+// slide slick
+.slick-next::before,
+.slick-prev::before {
+  color: green;
 }

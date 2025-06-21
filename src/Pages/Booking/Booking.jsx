@@ -16,6 +16,7 @@ import moment from "moment";
 import { languageContext } from "../../context/LanguageContext";
 import { getContentByLanguage } from "../../context/languageUseCase";
 import { bookingContent } from "./booking.lang";
+import { formatVND } from "../../utils/formatToVnd";
 const Booking = ({ tour, avgRating }) => {
   const { handleChangeLanguage } = useContext(languageContext);
   const language = getContentByLanguage(bookingContent);
@@ -38,7 +39,7 @@ const Booking = ({ tour, avgRating }) => {
     );
     setCurrentTourSchedule(current);
   }, [tourScheduleId]);
-  const serviceFee = 10;
+  const serviceFee = 10000;
 
   const { mutate, isPending } = useBookingTourMutation();
 
@@ -96,7 +97,7 @@ const Booking = ({ tour, avgRating }) => {
     <div className="booking">
       <div className="booking__top d-flex align-items-center justify-content-between">
         <h3>
-          ${price} <span>/{language.person}</span>
+          {price} đ<span>/{language.person}</span>
         </h3>
         <span className="tour__rating d-flex align-items-center">
           <i
@@ -255,11 +256,13 @@ const Booking = ({ tour, avgRating }) => {
               <div className="booking__bottom">
                 <div className="border-0 px-0 service-fee">
                   <div>{language.serviceFee}</div>
-                  <div>${serviceFee}</div>
+                  <div>{formatVND(serviceFee)} đ</div>
                 </div>
                 <div className="border-0 px-0 total">
                   <div>{language.total}</div>
-                  <div>${price * values.guestSize + serviceFee}</div>
+                  <div>
+                    {formatVND(price * values.guestSize + serviceFee)} đ
+                  </div>
                 </div>
               </div>
               <Button

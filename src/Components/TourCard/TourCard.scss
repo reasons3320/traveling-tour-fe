@@ -93,12 +93,19 @@
   max-width: 100%;
   overflow: auto;
   width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 5px;
 }
 .card__position {
   .card__top__duration {
     font-size: 1rem;
     color: var(--primary-color);
     font-weight: 500;
+    display: flex;
+    justify-content: start;
+    align-items: center;
   }
 }
 .card__top__groupSize {
@@ -159,7 +166,7 @@
   margin: 0 !important;
   padding: 0 !important ;
   color: var(--secondary-color);
-  font-size:.8rem !important;
+  font-size: 1.2rem !important;
   max-width: 70%;
   display: flex;
   align-items: center;
@@ -170,7 +177,8 @@
 .card__bottom h5 span {
   font-weight: 500;
   color: var(--text-color);
-  font-size: .8rem !important;
+  font-size: 1.2rem !important;
+  font-weight: bold;
 }
 
 .booking__btn {

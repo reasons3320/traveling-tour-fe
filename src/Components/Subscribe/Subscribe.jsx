@@ -18,7 +18,15 @@ const Subscribe = () => {
         <img src={img1} alt="" />
         {/* </div> */}
         <div className="textDiv">
-          <h3 data-aos="fade-up">{language.title}</h3>
+          <h3
+            data-aos="fade-up"
+            style={{
+              fontSize: 25,
+              fontWeight: "bold",
+            }}
+          >
+            {language.title}
+          </h3>
           <p data-aos="fade-up">{language.desc}</p>
           <button data-aos="fade-up" className="btn">
             {language.btn}

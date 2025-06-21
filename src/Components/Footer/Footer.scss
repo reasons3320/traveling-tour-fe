@@ -1,12 +1,20 @@
 .footer {
-  background: var(--primaryColorLight);
- padding: 10px 0;
+  // background: var(--primaryColorLight);
+  // background: url(../../assets/footer-background.avif) no-repeat center;
+  background-size: cover;
+  // padding: 0 50px;
+  border-top: 1px solid var(--primaryColor);
   .secContainer {
-    padding: 0 !important;
+    backdrop-filter: blur(5px);
+    width: 100%;
     gap: 1.5rem;
     text-align: center;
     align-items: flex-start;
+    border-top: 1px solid gray;
     .logoDiv {
+      :hover {
+        text-shadow: 2px 2px var(--primaryColorLight);
+      }
       .footerLogo {
         display: flex;
         color: var(--blackColor);
@@ -44,12 +52,16 @@
         padding-bottom: 0.5rem;
         color: var(--blackColor);
         font-weight: 700;
+        font-family: "Sour Gummy";
       }
       li {
+        transition: all 0.3s ease-in-out;
+        font-size: 1.5rem;
+        font-weight: 600;
         &:hover {
           transform: translate(10px);
           a {
-            color: var(--primaryColor);
+            color: var(--primaryColorLight);
           }
         }
         a,
@@ -58,6 +70,30 @@
           color: var(--blackColor);
           font-size: 13px;
           font-weight: 500;
+        }
+      }
+    }
+    .contact-details {
+      background-color: rgba(255, 255, 255, 0.586);
+      border-radius: 20px;
+      height: 100%;
+      backdrop-filter: blur(5px);
+      .phone {
+        font-size: 15px;
+      }
+      div {
+        display: flex;
+        gap: 10px;
+        align-items: start;
+        span {
+          display: flex;
+          align-items: center;
+        }
+        .contact-email {
+          border: none;
+          box-shadow: 0 0 5px var(--primaryColor);
+          height: 48px;
+          border-radius: 12px;
         }
       }
     }
@@ -80,7 +116,7 @@
 }
 @media screen and (min-width: 640px) {
   .secContainer {
-    padding: 2rem 0;
+    padding: 1rem 0;
     grid-template-columns: repeat(4, 1fr);
   }
 }

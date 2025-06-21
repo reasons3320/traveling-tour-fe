@@ -16,7 +16,16 @@ const Questions = () => {
   return (
     <div className="questions section container">
       <div className="secHeading">
-        <h3 data-aos="fade-up">{language.title}</h3>
+        <h3
+          data-aos="fade-up"
+          style={{
+            fontSize: 25,
+            fontWeight: 700,
+            color: "#f34e1b",
+          }}
+        >
+          {language.title}
+        </h3>
       </div>
       <div className="secContainer grid">
         <div className="accordion grid" data-aos="fade-up">
@@ -44,9 +53,7 @@ const Questions = () => {
         <div className="form">
           <div className="secHeading">
             <h4 data-aos="fade-down">{language.secondTitle}</h4>
-            <p data-aos="fade-down">
-              {language.desc}
-            </p>
+            <p data-aos="fade-down">{language.desc}</p>
           </div>
           <div className="formContent grid">
             <input

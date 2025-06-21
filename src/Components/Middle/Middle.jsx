@@ -11,7 +11,7 @@ const Middle = () => {
     Aos.init({ duration: 2000 });
   }, []);
   return (
-    <div className="middle section">
+    <div className="middle">
       <div className="secContainer container">
         <div className="grid">
           <span className="flex">

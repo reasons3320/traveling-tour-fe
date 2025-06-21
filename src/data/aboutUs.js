@@ -1,13 +1,7 @@
 export const aboutUs = [
   {
     title: "Core Values",
-    values: [
-      "Dedication",
-      "Integrity",
-      "Innovation",
-    //   "Transparency",
-    //   "Customer-first approach",
-    ],
+    values: ["Dedication", "Integrity", "Innovation"],
   },
   {
     title: "Support Services",
@@ -15,8 +9,8 @@ export const aboutUs = [
       "24/7 Customer Support",
       "Tailored Solutions for Your Needs",
       "Expert Guidance and Advice",
-    //   "Reliable Products and Services",
-    //   "Regular Updates and Resources",
+      //   "Reliable Products and Services",
+      //   "Regular Updates and Resources",
     ],
   },
   {
